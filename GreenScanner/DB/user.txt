@@ -1,0 +1,6 @@
+https://remotemysql.com/phpmyadmin/db_sql.php?db=LXszQWsJ3t
+
+user:
+LXszQWsJ3t
+password:
+AheKZliXBY
