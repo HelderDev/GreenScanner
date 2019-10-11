@@ -2,12 +2,14 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="338.0" prefWidth="348.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="338.0" prefWidth="695.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.FXMLDocumentController">
     <children>
         <Button id="btnInsert" fx:id="button" layoutX="239.0" layoutY="289.0" onAction="#handleButtonAction" style="-fx-background-color: #5D995D; -fx-text-fill: #fff;" text="Cadastrar" />
         <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
@@ -20,5 +22,14 @@
             <Image url="@images/User_icon_BLACK-01.png" />
          </image>
       </ImageView>
+      <TableView fx:id="usersTable" layoutX="326.0" layoutY="13.0" prefHeight="301.0" prefWidth="358.0">
+        <columns>
+          <TableColumn fx:id="id" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="name" prefWidth="75.0" text="Name" />
+            <TableColumn fx:id="title" prefWidth="75.0" text="Title" />
+            <TableColumn fx:id="permission" prefWidth="75.0" text="Permission" />
+            <TableColumn fx:id="creation" prefWidth="75.0" text="Creation" />
+        </columns>
+      </TableView>
     </children>
 </AnchorPane>
