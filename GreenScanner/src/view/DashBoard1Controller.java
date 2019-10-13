@@ -35,7 +35,7 @@ import model.dao.UserDAO;
  *
  * @author hdrhe
  */
-public class FXMLDocumentController implements Initializable {
+public class DashBoard1Controller implements Initializable {
 
     @FXML
     private Label label;

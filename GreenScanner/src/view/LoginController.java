@@ -91,7 +91,7 @@ public class LoginController implements Initializable {
         if (dao.checkLogin(nameField.getText(), titleField.getText())) {
 
             try {
-                Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+               Parent root = FXMLLoader.load(getClass().getResource("DashBoard1.fxml"));
 
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
@@ -100,7 +100,7 @@ public class LoginController implements Initializable {
                 // Hide this current window (if this is what you want)
                 ((Node) (event.getSource())).getScene().getWindow().hide();
             } catch (IOException e) {
-                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "deu erro bixao");
             }
         }
         else{
