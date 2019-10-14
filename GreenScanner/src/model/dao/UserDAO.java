@@ -23,6 +23,12 @@ import model.bean.User;
  */
 public class UserDAO {
 
+    User u = new User();
+
+    public User getUser() {
+        return u;
+    }
+
     public boolean checkLogin(String login, String senha) {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
@@ -32,7 +38,7 @@ public class UserDAO {
         //  List<User> users = new ArrayList<>();
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM user WHERE name = ? and title = ?");
+            stmt = con.prepareStatement("SELECT * FROM user WHERE name = ? and id = ?");
             stmt.setString(1, login);
             stmt.setString(2, senha);
 
@@ -40,6 +46,12 @@ public class UserDAO {
 
             if (rs.next()) {
                 check = true;
+
+                u.setId(rs.getInt("id"));
+                u.setName(rs.getString("name"));
+                u.setTitle(rs.getString("title"));
+                u.setPermission(rs.getInt("permission"));
+                u.setCreation(rs.getString("creation"));;
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao acessar o banco" + ex);
@@ -49,6 +61,31 @@ public class UserDAO {
         }
 
         return check;
+    }
+
+    public int checkPermission(String name, String id) {
+        int permission = 0;
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        //User u = new User();
+        ResultSet rs = null;
+
+        try {
+            stmt = con.prepareStatement("SELECT PERMISSION FROM user  WHERE name = ? and id = ?");
+            stmt.setString(1, name);
+            stmt.setString(2, id);
+
+            rs = stmt.executeQuery();
+            if (rs.next()) {
+                permission = rs.getInt("permission");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao acessar o banco" + ex);
+
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        return permission;
     }
 
     public void create(User u) {

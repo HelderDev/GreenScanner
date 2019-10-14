@@ -13,6 +13,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,7 +29,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import model.bean.Plantation;
 import model.bean.User;
+import model.dao.PlantationDAO;
 import model.dao.UserDAO;
 
 /**
@@ -44,70 +47,53 @@ public class DashBoard1Controller implements Initializable {
     @FXML
     private TextField nameField;
     @FXML
-    private TableView<User> usersTable;
+    private TableView<Plantation> plantsTable;
     @FXML
-    private TableColumn<User, String> id;
+    private TableColumn<Plantation, String> id;
     @FXML
-    private TableColumn<User, String> name;
+    private TableColumn<Plantation, String> name;
     @FXML
-    private TableColumn<User, String> title;
+    private TableColumn<Plantation, String> id_owner;
     @FXML
-    private TableColumn<User, String> permission;
+    private TableColumn<Plantation, String> address;
     @FXML
-    private TableColumn<User, String> creation;
+    private TableColumn<Plantation, String> city;
+    @FXML
+    private TableColumn<Plantation, String> state;
 
     ObservableList<User> oblist = FXCollections.observableArrayList();
 
+    UserDAO ud = new UserDAO();
     @FXML
     private void handleButtonAction(ActionEvent event) {
-//        System.out.println();
-//        label.setText("Hello World!");
-
-//        byte[] probeImage;
-//        try{
-//            probeImage = Files.readAllBytes(Paths.get("C:\\Users\\amorimhe\\Documents\\NetBeansProjects\\GreenScanner\\src\\greenscanner\\probe.png"));
-// 
-//            byte[] candidateImage = Files.readAllBytes(Paths.get("C:\\Users\\amorimhe\\Documents\\NetBeansProjects\\GreenScanner\\src\\greenscanner\\probe.png"));
 //
-//            FingerprintTemplate probe = new FingerprintTemplate()
-//                    .dpi(500)
-//                    .create(probeImage);
+//        Date date = new Date();
+//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //
-//            FingerprintTemplate candidate = new FingerprintTemplate()
-//                    .dpi(500)
-//                    .create(candidateImage);
-//        }
-//         catch (IOException ex) {
-//            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-//    }
-        System.out.println("teste");
-        Date date = new Date(); // this object contains the current date value
-//SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-        User u = new User();
-
-        UserDAO dao = new UserDAO();
-        u.setTitle(titleField.getText());
-        u.setName(nameField.getText());
-
-        u.setPermission(1);
-        u.setCreation(formatter.format(date));
-        dao.create(u);
-        readTable();
+//        //User u = new User();
+//        Plantation p = new Plantation();
+//        UserDAO dao = new UserDAO();
+//        u.setTitle(titleField.getText());
+//        u.setName(nameField.getText());
+//
+//        u.setPermission(1);
+//        u.setCreation(formatter.format(date));
+//        dao.create(u);
+//        readTable();
     }
 
-    public void readTable() {
-        usersTable.getItems().clear();
-        UserDAO udao = new UserDAO();
-        for (User u : udao.read()) {
-            id.setCellValueFactory(new PropertyValueFactory<>("id"));
+    public void readTable(User u) {
+        plantsTable.getItems().clear();
+        PlantationDAO pdao = new PlantationDAO();
+        for (Plantation p : pdao.read(u)) {
+            this.id.setCellValueFactory(new PropertyValueFactory<>("id"));
             name.setCellValueFactory(new PropertyValueFactory<>("name"));
-            title.setCellValueFactory(new PropertyValueFactory<>("title"));
-            permission.setCellValueFactory(new PropertyValueFactory<>("permission"));
-            creation.setCellValueFactory(new PropertyValueFactory<>("creation"));
+            id_owner.setCellValueFactory(new PropertyValueFactory<>("id_owner"));
+            address.setCellValueFactory(new PropertyValueFactory<>("address"));
+            city.setCellValueFactory(new PropertyValueFactory<>("city"));
+            state.setCellValueFactory(new PropertyValueFactory<>("state"));
 
-            usersTable.getItems().add(u);
+            plantsTable.getItems().add(p);
 
         }
     }
@@ -115,7 +101,9 @@ public class DashBoard1Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        readTable();
+                    System.out.println("ID DashBoard: " + ud.getUser().getId());
+
+        readTable(ud.getUser());
     }
 
 }

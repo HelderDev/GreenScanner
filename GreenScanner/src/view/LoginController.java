@@ -43,67 +43,69 @@ import model.dao.UserDAO;
 public class LoginController implements Initializable {
 
     @FXML
-    private TextField titleField;
+    private TextField idField;
     @FXML
     private TextField nameField;
+   
 
     @FXML
     private void handleButtonAction(ActionEvent event) {
 //        System.out.println();
 //        label.setText("Hello World!");
 
-//        byte[] probeImage;
-//        try{
-//            probeImage = Files.readAllBytes(Paths.get("C:\\Users\\amorimhe\\Documents\\NetBeansProjects\\GreenScanner\\src\\greenscanner\\probe.png"));
-// 
-//            byte[] candidateImage = Files.readAllBytes(Paths.get("C:\\Users\\amorimhe\\Documents\\NetBeansProjects\\GreenScanner\\src\\greenscanner\\probe.png"));
-//
-//            FingerprintTemplate probe = new FingerprintTemplate()
-//                    .dpi(500)
-//                    .create(probeImage);
-//
-//            FingerprintTemplate candidate = new FingerprintTemplate()
-//                    .dpi(500)
-//                    .create(candidateImage);
-//        }
-//         catch (IOException ex) {
-//            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-//    }
-//        System.out.println("teste");
-//        Date date = new Date(); // this object contains the current date value
-////SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//
-//        User u = new User();
-//
-//        UserDAO dao = new UserDAO();
-//        u.setTitle(titleField.getText());
-//        u.setName(nameField.getText());
-//
-//        u.setPermission(1);
-//        u.setCreation(formatter.format(date));
-//        dao.create(u);
-//        readTable();
         Stage stage = new Stage();
 
         UserDAO dao = new UserDAO();
 
-        if (dao.checkLogin(nameField.getText(), titleField.getText())) {
+        if (dao.checkLogin(nameField.getText(), idField.getText())) {
+            switch (dao.checkPermission(nameField.getText(), idField.getText())) {
+                case 1:
+                    try {
+                        Parent root = FXMLLoader.load(getClass().getResource("DashBoard1.fxml"));
 
-            try {
-               Parent root = FXMLLoader.load(getClass().getResource("DashBoard1.fxml"));
+                        Scene scene = new Scene(root);
+                        stage.setScene(scene);
+                        stage.show();
+                       
+                        // Hide this current window (if this is what you want)
+                        ((Node) (event.getSource())).getScene().getWindow().hide();
+                    } catch (IOException e) {
+                        JOptionPane.showMessageDialog(null, e);
+                    }
+                    break;
+                case 2:
+                    try {
+                        Parent root = FXMLLoader.load(getClass().getResource("DashBoard2.fxml"));
 
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
+                        Scene scene = new Scene(root);
+                        stage.setScene(scene);
+                        stage.show();
 
-                // Hide this current window (if this is what you want)
-                ((Node) (event.getSource())).getScene().getWindow().hide();
-            } catch (IOException e) {
-                JOptionPane.showMessageDialog(null, "deu erro bixao");
+                        // Hide this current window (if this is what you want)
+                        ((Node) (event.getSource())).getScene().getWindow().hide();
+                    } catch (IOException e) {
+                        JOptionPane.showMessageDialog(null, "deu erro bixao");
+                    }
+                    break;
+                case 3:
+                    try {
+                        Parent root = FXMLLoader.load(getClass().getResource("DashBoard3.fxml"));
+
+                        Scene scene = new Scene(root);
+                        stage.setScene(scene);
+                        stage.show();
+
+                        // Hide this current window (if this is what you want)
+                        ((Node) (event.getSource())).getScene().getWindow().hide();
+                    } catch (IOException e) {
+                        JOptionPane.showMessageDialog(null, "deu erro bixao");
+                    }
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null, "Usuário inválido!");
+                    ;
             }
-        }
-        else{
+        } else {
             JOptionPane.showMessageDialog(null, "Usuário inválido!");
         }
     }
