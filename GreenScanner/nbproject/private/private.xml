@@ -3,12 +3,23 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/amorimhe/Documents/NetBeansProjects/Versioned%20GreenScanner/GreenScanner/src/model/dao/UserDAO.java</file>
+            <file>file:/C:/Users/amorimhe/Documents/NetBeansProjects/Versioned%20GreenScanner/GreenScanner/src/view/DashBoard2.fxml</file>
             <file>file:/C:/Users/amorimhe/Documents/NetBeansProjects/Versioned%20GreenScanner/GreenScanner/src/view/GreenScanner.java</file>
-            <file>file:/C:/Users/amorimhe/Documents/NetBeansProjects/Versioned%20GreenScanner/GreenScanner/src/view/Login.fxml</file>
             <file>file:/C:/Users/amorimhe/Documents/NetBeansProjects/Versioned%20GreenScanner/GreenScanner/src/connection/ConnectionFactory.java</file>
+            <file>file:/C:/Users/amorimhe/Documents/NetBeansProjects/Versioned%20GreenScanner/GreenScanner/src/view/DashBoard2Controller.java</file>
+            <file>file:/C:/Users/amorimhe/Documents/NetBeansProjects/Versioned%20GreenScanner/GreenScanner/src/model/dao/UserDAO.java</file>
+            <file>file:/C:/Users/amorimhe/Documents/NetBeansProjects/Versioned%20GreenScanner/GreenScanner/src/model/dao/CategoriaDAO.java</file>
+            <file>file:/C:/Users/amorimhe/Documents/NetBeansProjects/Versioned%20GreenScanner/GreenScanner/src/view/probe.png</file>
+            <file>file:/C:/Users/amorimhe/Documents/NetBeansProjects/Versioned%20GreenScanner/GreenScanner/src/model/bean/Plantation.java</file>
+            <file>file:/C:/Users/amorimhe/Documents/NetBeansProjects/Versioned%20GreenScanner/GreenScanner/src/view/DashBoard1.fxml</file>
+            <file>file:/C:/Users/amorimhe/Documents/NetBeansProjects/Versioned%20GreenScanner/GreenScanner/src/view/Login.fxml</file>
+            <file>file:/C:/Users/amorimhe/Documents/NetBeansProjects/Versioned%20GreenScanner/GreenScanner/src/view/DashBoard3Controller.java</file>
+            <file>file:/C:/Users/amorimhe/Documents/NetBeansProjects/Versioned%20GreenScanner/GreenScanner/src/view/DashBoard1Controller.java</file>
+            <file>file:/C:/Users/amorimhe/Documents/NetBeansProjects/Versioned%20GreenScanner/GreenScanner/src/model/dao/PlantationDAO.java</file>
+            <file>file:/C:/Users/amorimhe/Documents/NetBeansProjects/Versioned%20GreenScanner/GreenScanner/src/model/bean/Categoria.java</file>
             <file>file:/C:/Users/amorimhe/Documents/NetBeansProjects/Versioned%20GreenScanner/GreenScanner/src/view/LoginController.java</file>
             <file>file:/C:/Users/amorimhe/Documents/NetBeansProjects/Versioned%20GreenScanner/GreenScanner/src/model/bean/User.java</file>
+            <file>file:/C:/Users/amorimhe/Documents/NetBeansProjects/Versioned%20GreenScanner/GreenScanner/src/view/DashBoard3.fxml</file>
         </group>
     </open-files>
 </project-private>
