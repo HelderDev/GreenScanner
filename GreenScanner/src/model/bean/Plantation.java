@@ -11,7 +11,11 @@ package model.bean;
  */
 public class Plantation {
 
- 
+    private int uID;
+    private String uName;
+    private String uTitle;
+    private int uPermission;
+    private String uCreation;
 
     private int id;
     private int id_owner;
@@ -19,6 +23,22 @@ public class Plantation {
     private String address;
     private String city;
     private String state;
+
+    public int getuID() {
+        return uID;
+    }
+
+    public void setuID(int uID) {
+        this.uID = uID;
+    }
+
+    public String getuName() {
+        return uName;
+    }
+
+    public void setuName(String uName) {
+        this.uName = uName;
+    }
 
     public int getId() {
         return id;
@@ -66,6 +86,30 @@ public class Plantation {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public String getuTitle() {
+        return uTitle;
+    }
+
+    public void setuTitle(String uTitle) {
+        this.uTitle = uTitle;
+    }
+
+    public int getuPermission() {
+        return uPermission;
+    }
+
+    public void setuPermission(int uPermission) {
+        this.uPermission = uPermission;
+    }
+
+    public String getuCreation() {
+        return uCreation;
+    }
+
+    public void setuCreation(String uCreation) {
+        this.uCreation = uCreation;
     }
 
 }

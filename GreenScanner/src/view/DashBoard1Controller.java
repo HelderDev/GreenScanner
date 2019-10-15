@@ -32,6 +32,8 @@ import javafx.stage.Stage;
 import model.bean.Plantation;
 import model.bean.User;
 import model.dao.PlantationDAO;
+import static model.dao.PlantationDAO.owner;
+import static model.dao.PlantationDAO.title;
 import model.dao.UserDAO;
 import static model.dao.UserDAO.idValue;
 
@@ -40,7 +42,7 @@ import static model.dao.UserDAO.idValue;
  * @author hdrhe
  */
 public class DashBoard1Controller implements Initializable {
-
+    
     @FXML
     private Label label;
     @FXML
@@ -61,11 +63,10 @@ public class DashBoard1Controller implements Initializable {
     private TableColumn<Plantation, String> city;
     @FXML
     private TableColumn<Plantation, String> state;
-
+    
     ObservableList<User> oblist = FXCollections.observableArrayList();
 
-  //  UserDAO ud = new UserDAO();
-
+    //  UserDAO ud = new UserDAO();
     @FXML
     private void handleButtonAction(ActionEvent event) {
 //
@@ -83,7 +84,7 @@ public class DashBoard1Controller implements Initializable {
 //        dao.create(u);
 //        readTable();
     }
-
+    
     public void readTable(int u) {
         plantsTable.getItems().clear();
         PlantationDAO pdao = new PlantationDAO();
@@ -94,18 +95,19 @@ public class DashBoard1Controller implements Initializable {
             address.setCellValueFactory(new PropertyValueFactory<>("address"));
             city.setCellValueFactory(new PropertyValueFactory<>("city"));
             state.setCellValueFactory(new PropertyValueFactory<>("state"));
-
+            
             plantsTable.getItems().add(p);
-
         }
+        nameField.setText(owner);
+       titleField.setText(title);
     }
-
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         //  System.out.println("ID DashBoard: " + ud.getUser().getId());
-         
+
         readTable(idValue);
     }
-
+    
 }

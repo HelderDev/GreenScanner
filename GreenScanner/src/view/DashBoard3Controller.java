@@ -13,6 +13,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,8 +29,13 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import model.bean.Plantation;
 import model.bean.User;
+import model.dao.PlantationDAO;
+import static model.dao.PlantationDAO.owner;
+import static model.dao.PlantationDAO.title;
 import model.dao.UserDAO;
+import static model.dao.UserDAO.idValue;
 
 /**
  *
@@ -44,28 +50,40 @@ public class DashBoard3Controller implements Initializable {
     @FXML
     private TextField nameField;
     @FXML
-    private TableView<User> usersTable;
+    private TableView<Plantation> plantsTable;
     @FXML
-    private TableColumn<User, String> id;
+    private TableColumn<Plantation, String> id;
     @FXML
-    private TableColumn<User, String> name;
+    private TableColumn<Plantation, String> name;
     @FXML
-    private TableColumn<User, String> title;
+    private TableColumn<Plantation, String> id_owner;
     @FXML
-    private TableColumn<User, String> permission;
+    private TableColumn<Plantation, String> address;
     @FXML
-    private TableColumn<User, String> creation;
+    private TableColumn<Plantation, String> city;
+    @FXML
+    private TableColumn<Plantation, String> state;
+    @FXML
+    private TableColumn<Plantation, String> uID;
+    @FXML
+    private TableColumn<Plantation, String> uName;
+    @FXML
+    private TableColumn<Plantation, String> uTitle;
+    @FXML
+    private TableColumn<Plantation, String> uPermission;
+    @FXML
+    private TableColumn<Plantation, String> uCreation;
 
-    ObservableList<User> oblist = FXCollections.observableArrayList();
-
+    //ObservableList<Plantation> oblist = FXCollections.observableArrayList();
+    //  UserDAO ud = new UserDAO();
     @FXML
     private void handleButtonAction(ActionEvent event) {
-
-        Date date = new Date(); 
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-//        User u = new User();
 //
+//        Date date = new Date();
+//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//
+//        //User u = new User();
+//        Plantation p = new Plantation();
 //        UserDAO dao = new UserDAO();
 //        u.setTitle(titleField.getText());
 //        u.setName(nameField.getText());
@@ -77,23 +95,36 @@ public class DashBoard3Controller implements Initializable {
     }
 
     public void readTable() {
-        usersTable.getItems().clear();
-        UserDAO udao = new UserDAO();
-        for (User u : udao.read()) {
+        plantsTable.getItems().clear();
+        PlantationDAO pdao = new PlantationDAO();
+        for (Plantation p : pdao.readAll()) {
             id.setCellValueFactory(new PropertyValueFactory<>("id"));
             name.setCellValueFactory(new PropertyValueFactory<>("name"));
-            title.setCellValueFactory(new PropertyValueFactory<>("title"));
-            permission.setCellValueFactory(new PropertyValueFactory<>("permission"));
-            creation.setCellValueFactory(new PropertyValueFactory<>("creation"));
+            id_owner.setCellValueFactory(new PropertyValueFactory<>("id_owner"));
+            address.setCellValueFactory(new PropertyValueFactory<>("address"));
+            city.setCellValueFactory(new PropertyValueFactory<>("city"));
+            state.setCellValueFactory(new PropertyValueFactory<>("state"));
 
-            usersTable.getItems().add(u);
-
+            uID.setCellValueFactory(new PropertyValueFactory<>("name"));
+            uName.setCellValueFactory(new PropertyValueFactory<>("uName"));
+            uTitle.setCellValueFactory(new PropertyValueFactory<>("uTitle"));
+            uPermission.setCellValueFactory(new PropertyValueFactory<>("uPermission"));
+            uCreation.setCellValueFactory(new PropertyValueFactory<>("uCreation"));
+            plantsTable.getItems().add(p);
+            
+            
         }
+        
+       
+        nameField.setText(owner);
+        titleField.setText(title);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        //  System.out.println("ID DashBoard: " + ud.getUser().getId());
+
         readTable();
     }
 

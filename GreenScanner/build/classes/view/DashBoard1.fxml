@@ -10,7 +10,7 @@
     <children>
         <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
       <TextField fx:id="nameField" layoutX="141.0" layoutY="32.0" prefHeight="26.0" prefWidth="99.0" AnchorPane.leftAnchor="20.0" />
-      <TextField fx:id="idField" layoutX="141.0" layoutY="32.0" prefHeight="26.0" prefWidth="90.0" />
+      <TextField fx:id="titleField" layoutX="141.0" layoutY="32.0" prefHeight="26.0" prefWidth="90.0" />
       <Label layoutX="20.0" layoutY="14.0" text="Nome" />
       <Label layoutX="141.0" layoutY="14.0" text="Título" />
       <TableView fx:id="plantsTable" layoutX="36.0" layoutY="75.0" prefHeight="204.0" prefWidth="738.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="80.0">

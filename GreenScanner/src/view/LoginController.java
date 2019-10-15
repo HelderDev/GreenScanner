@@ -98,7 +98,7 @@ public class LoginController implements Initializable {
                         // Hide this current window (if this is what you want)
                         ((Node) (event.getSource())).getScene().getWindow().hide();
                     } catch (IOException e) {
-                        JOptionPane.showMessageDialog(null, "deu erro bixao");
+                        JOptionPane.showMessageDialog(null, e);
                     }
                     break;
                 default:

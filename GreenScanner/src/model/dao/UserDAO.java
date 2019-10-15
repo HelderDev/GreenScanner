@@ -140,6 +140,37 @@ public class UserDAO {
         return users;
     }
 
+        public List<User> readAll() {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+
+        ResultSet rs = null;
+
+        List<User> users = new ArrayList<>();
+
+        try {
+            stmt = con.prepareStatement("select u.id as 'uID', u.name as 'uName', u.title as 'uTitle', u.permission as 'uPermission', u.creation as 'uCreation', p.id as 'pID', p.id_owner, p.name, p.address, p.city, p.state from user u inner join plantation p on u.id = p.id_owner");
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                User user = new User(rs.getInt("uID"));
+                user.setId(rs.getInt("uID"));
+                user.setName(rs.getString("uName"));
+                user.setTitle(rs.getString("uTitle"));
+                user.setPermission(rs.getInt("uPermission"));
+                user.setCreation(rs.getString("uCreation"));
+                users.add(user);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao acessar o banco" + ex);
+
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+
+        return users;
+    }
+    
     public void update(User u) {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
