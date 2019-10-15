@@ -33,6 +33,7 @@ import model.bean.Plantation;
 import model.bean.User;
 import model.dao.PlantationDAO;
 import model.dao.UserDAO;
+import static model.dao.UserDAO.idValue;
 
 /**
  *
@@ -63,7 +64,8 @@ public class DashBoard1Controller implements Initializable {
 
     ObservableList<User> oblist = FXCollections.observableArrayList();
 
-    UserDAO ud = new UserDAO();
+  //  UserDAO ud = new UserDAO();
+
     @FXML
     private void handleButtonAction(ActionEvent event) {
 //
@@ -82,7 +84,7 @@ public class DashBoard1Controller implements Initializable {
 //        readTable();
     }
 
-    public void readTable(User u) {
+    public void readTable(int u) {
         plantsTable.getItems().clear();
         PlantationDAO pdao = new PlantationDAO();
         for (Plantation p : pdao.read(u)) {
@@ -101,9 +103,9 @@ public class DashBoard1Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-                    System.out.println("ID DashBoard: " + ud.getUser().getId());
-
-        readTable(ud.getUser());
+        //  System.out.println("ID DashBoard: " + ud.getUser().getId());
+         
+        readTable(idValue);
     }
 
 }

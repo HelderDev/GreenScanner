@@ -23,12 +23,8 @@ import model.bean.User;
  */
 public class UserDAO {
 
-    User u = new User();
-
-    public User getUser() {
-        return u;
-    }
-
+    public static int idValue;
+ 
     public boolean checkLogin(String login, String senha) {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
@@ -47,11 +43,15 @@ public class UserDAO {
             if (rs.next()) {
                 check = true;
 
-                u.setId(rs.getInt("id"));
-                u.setName(rs.getString("name"));
-                u.setTitle(rs.getString("title"));
-                u.setPermission(rs.getInt("permission"));
-                u.setCreation(rs.getString("creation"));;
+//                u.setId(rs.getInt("id"));
+//                u.setName(rs.getString("name"));
+//                u.setTitle(rs.getString("title"));
+//                u.setPermission(rs.getInt("permission"));
+//                u.setCreation(rs.getString("creation"));;
+//                System.out.println("USERDAO ID: " + u.getId());
+             //   User u = new User(rs.getInt("id"));
+                idValue = rs.getInt("id");
+                System.out.println("USERDAO GETUSER: " + idValue);
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao acessar o banco" + ex);
@@ -122,13 +122,12 @@ public class UserDAO {
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                User user = new User();
+                User user = new User(rs.getInt("id"));
                 user.setId(rs.getInt("id"));
                 user.setName(rs.getString("name"));
                 user.setTitle(rs.getString("title"));
                 user.setPermission(rs.getInt("permission"));
                 user.setCreation(rs.getString("creation"));
-
                 users.add(user);
             }
         } catch (SQLException ex) {

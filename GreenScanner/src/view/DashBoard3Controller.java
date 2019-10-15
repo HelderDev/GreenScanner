@@ -64,16 +64,16 @@ public class DashBoard3Controller implements Initializable {
         Date date = new Date(); 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-        User u = new User();
-
-        UserDAO dao = new UserDAO();
-        u.setTitle(titleField.getText());
-        u.setName(nameField.getText());
-
-        u.setPermission(1);
-        u.setCreation(formatter.format(date));
-        dao.create(u);
-        readTable();
+//        User u = new User();
+//
+//        UserDAO dao = new UserDAO();
+//        u.setTitle(titleField.getText());
+//        u.setName(nameField.getText());
+//
+//        u.setPermission(1);
+//        u.setCreation(formatter.format(date));
+//        dao.create(u);
+//        readTable();
     }
 
     public void readTable() {

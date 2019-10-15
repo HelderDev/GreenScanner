@@ -23,7 +23,7 @@ import model.bean.User;
 public class PlantationDAO {
 
  
-    public List<Plantation> read(User u) {
+    public List<Plantation> read(int u) {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         
@@ -34,8 +34,8 @@ public class PlantationDAO {
         try {
             
             stmt = con.prepareStatement("select * from plantation p inner join user u on  u.id = p.id_owner where u.id = ?");
-            stmt.setInt(1, u.getId());
-            System.out.println("ID PlantationDAO: " + u.getId());
+            stmt.setInt(1, u);
+            System.out.println("ID PlantationDAO: " + u);
             rs = stmt.executeQuery();
             
             while (rs.next()) {
