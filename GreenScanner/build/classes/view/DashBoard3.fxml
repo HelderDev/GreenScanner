@@ -15,21 +15,21 @@
         <TextField fx:id="titleField" layoutX="116.0" layoutY="32.0" prefHeight="26.0" prefWidth="90.0" />
         <Label layoutX="36.0" layoutY="14.0" text="Nome" AnchorPane.leftAnchor="10.0" />
         <Label layoutX="116.0" layoutY="14.0" text="Título" />
-        <TableView fx:id="plantsTable" layoutX="36.0" layoutY="75.0" prefHeight="204.0" prefWidth="627.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="70.0">
+        <TableView fx:id="usersTable" layoutX="36.0" layoutY="75.0" prefHeight="204.0" prefWidth="627.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="70.0">
             <columns>
                
                     
-                <TableColumn fx:id="uID" prefWidth="75.0" text="ID User" />
+                <TableColumn fx:id="uID" onEditStart="#handleButtonAction" prefWidth="75.0" text="ID User" />
                 <TableColumn fx:id="uName" prefWidth="118.0" text="Name" />
                 <TableColumn fx:id="uTitle" prefWidth="96.0" text="Title" />
                 <TableColumn fx:id="uPermission" prefWidth="122.0" text="Permission" />
                 <TableColumn fx:id="uCreation" prefWidth="124.0" text="Creation" />
-                <TableColumn fx:id="id" prefWidth="90.0" text="ID Plantation" />
-                <TableColumn fx:id="name" prefWidth="75.0" text="Name" />
-                <TableColumn fx:id="id_owner" prefWidth="60.0" text="ID Owner" />
-                <TableColumn fx:id="address" prefWidth="75.0" text="Address" />
-                <TableColumn fx:id="city" prefWidth="75.0" text="City" />
-                <TableColumn fx:id="state" prefWidth="60.0" text="State" />         
+                <TableColumn fx:id="pID" prefWidth="90.0" text="ID Plantation" />
+                <TableColumn fx:id="pName" prefWidth="75.0" text="Name" />
+                <TableColumn fx:id="pOwner" prefWidth="60.0" text="ID Owner" />
+                <TableColumn fx:id="pAddress" prefWidth="75.0" text="Address" />
+                <TableColumn fx:id="pCity" prefWidth="75.0" text="City" />
+                <TableColumn fx:id="pState" prefWidth="60.0" text="State" />         
             </columns>
         </TableView>
     </children>

@@ -72,11 +72,11 @@ public class PlantationDAO {
         ResultSet rs = null;
 
         List<Plantation> plants = new ArrayList<>();
-        List<User> users = new ArrayList<>();
-        try {
+        
+         try {
             String sql = "select u.id as 'uID', u.name as 'uName', "
                     + "u.title as 'uTitle', u.permission as 'uPermission', u.creation as 'uCreation', "
-                    + "p.id as 'pID', p.id_owner, p.name, p.address, p.city, p.state "
+                    + "p.id as 'pID', p.id_owner as 'pOwner', p.name as 'pName', p.address as 'pAddress', p.city as 'pCity', p.state as 'pState' "
                     + "from plantation p inner join user u on u.id = p.id_owner";
             stmt = con.prepareStatement(sql);
 
@@ -90,11 +90,11 @@ public class PlantationDAO {
                 plant.setuPermission(rs.getInt("uPermission"));
                 plant.setuTitle(rs.getString("uTitle"));
                 plant.setId(rs.getInt("pID"));
-                plant.setName(rs.getString("p.name"));
-                plant.setId_owner(rs.getInt("p.id_owner"));
-                plant.setAddress(rs.getString("p.address"));
-                plant.setCity(rs.getString("p.city"));
-                plant.setState(rs.getString("p.state"));
+                plant.setName(rs.getString("pName"));
+                plant.setId_owner(rs.getInt("pOwner"));
+                plant.setAddress(rs.getString("pAddress"));
+                plant.setCity(rs.getString("pCity"));
+                plant.setState(rs.getString("pState"));
 
                 plants.add(plant);
 

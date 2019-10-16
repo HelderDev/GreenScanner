@@ -50,29 +50,29 @@ public class DashBoard3Controller implements Initializable {
     @FXML
     private TextField nameField;
     @FXML
-    private TableView<Plantation> plantsTable;
+    private TableView<User> usersTable;
     @FXML
-    private TableColumn<Plantation, String> id;
+    private TableColumn<User, String> pID;
     @FXML
-    private TableColumn<Plantation, String> name;
+    private TableColumn<User, String> pName;
     @FXML
-    private TableColumn<Plantation, String> id_owner;
+    private TableColumn<User, String> pOwner;
     @FXML
-    private TableColumn<Plantation, String> address;
+    private TableColumn<User, String> pAddress;
     @FXML
-    private TableColumn<Plantation, String> city;
+    private TableColumn<User, String> pCity;
     @FXML
-    private TableColumn<Plantation, String> state;
+    private TableColumn<User, String> pState;
     @FXML
-    private TableColumn<Plantation, String> uID;
+    private TableColumn<User, String> uID;
     @FXML
-    private TableColumn<Plantation, String> uName;
+    private TableColumn<User, String> uName;
     @FXML
-    private TableColumn<Plantation, String> uTitle;
+    private TableColumn<User, String> uTitle;
     @FXML
-    private TableColumn<Plantation, String> uPermission;
+    private TableColumn<User, String> uPermission;
     @FXML
-    private TableColumn<Plantation, String> uCreation;
+    private TableColumn<User, String> uCreation;
 
     //ObservableList<Plantation> oblist = FXCollections.observableArrayList();
     //  UserDAO ud = new UserDAO();
@@ -95,22 +95,22 @@ public class DashBoard3Controller implements Initializable {
     }
 
     public void readTable() {
-        plantsTable.getItems().clear();
-        PlantationDAO pdao = new PlantationDAO();
-        for (Plantation p : pdao.readAll()) {
-            id.setCellValueFactory(new PropertyValueFactory<>("id"));
-            name.setCellValueFactory(new PropertyValueFactory<>("name"));
-            id_owner.setCellValueFactory(new PropertyValueFactory<>("id_owner"));
-            address.setCellValueFactory(new PropertyValueFactory<>("address"));
-            city.setCellValueFactory(new PropertyValueFactory<>("city"));
-            state.setCellValueFactory(new PropertyValueFactory<>("state"));
+        usersTable.getItems().clear();
+        UserDAO udao = new UserDAO();
+        for (User u : udao.readAll()) {
+//            pID.setCellValueFactory(new PropertyValueFactory<>("id"));
+//            pName.setCellValueFactory(new PropertyValueFactory<>("name"));
+//            pOwner.setCellValueFactory(new PropertyValueFactory<>("id_owner"));
+//            pAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
+//            pCity.setCellValueFactory(new PropertyValueFactory<>("city"));
+//            pState.setCellValueFactory(new PropertyValueFactory<>("state"));
 
-            uID.setCellValueFactory(new PropertyValueFactory<>("name"));
-            uName.setCellValueFactory(new PropertyValueFactory<>("uName"));
-            uTitle.setCellValueFactory(new PropertyValueFactory<>("uTitle"));
-            uPermission.setCellValueFactory(new PropertyValueFactory<>("uPermission"));
-            uCreation.setCellValueFactory(new PropertyValueFactory<>("uCreation"));
-            plantsTable.getItems().add(p);
+            uID.setCellValueFactory(new PropertyValueFactory<>("id"));
+            uName.setCellValueFactory(new PropertyValueFactory<>("name"));
+            uTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
+            uPermission.setCellValueFactory(new PropertyValueFactory<>("permission"));
+            uCreation.setCellValueFactory(new PropertyValueFactory<>("creation"));
+            usersTable.getItems().add(u);
             
             
         }

@@ -39,6 +39,29 @@ public class Plantation {
     public void setuName(String uName) {
         this.uName = uName;
     }
+    public String getuTitle() {
+        return uTitle;
+    }
+
+    public void setuTitle(String uTitle) {
+        this.uTitle = uTitle;
+    }
+
+    public int getuPermission() {
+        return uPermission;
+    }
+
+    public void setuPermission(int uPermission) {
+        this.uPermission = uPermission;
+    }
+
+    public String getuCreation() {
+        return uCreation;
+    }
+
+    public void setuCreation(String uCreation) {
+        this.uCreation = uCreation;
+    }
 
     public int getId() {
         return id;
@@ -88,28 +111,5 @@ public class Plantation {
         this.state = state;
     }
 
-    public String getuTitle() {
-        return uTitle;
-    }
-
-    public void setuTitle(String uTitle) {
-        this.uTitle = uTitle;
-    }
-
-    public int getuPermission() {
-        return uPermission;
-    }
-
-    public void setuPermission(int uPermission) {
-        this.uPermission = uPermission;
-    }
-
-    public String getuCreation() {
-        return uCreation;
-    }
-
-    public void setuCreation(String uCreation) {
-        this.uCreation = uCreation;
-    }
 
 }
