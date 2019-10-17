@@ -165,7 +165,7 @@ public class DashBoard3Controller implements Initializable {
     }
 
     private void printRow(User item) {
-                plantsTable.getItems().clear();
+        plantsTable.getItems().clear();
 
         PlantationDAO pdao = new PlantationDAO();
 
@@ -194,37 +194,14 @@ public class DashBoard3Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        //  System.out.println("ID DashBoard: " + ud.getUser().getId());
 
         readTable();
+        uID.setStyle("-fx-alignment: CENTER;");
+        uPermission.setStyle("-fx-alignment: CENTER;");
+        idField.setStyle("-fx-alignment: CENTER;");
+        id_ownerField.setStyle("-fx-alignment: CENTER;");
 
-//        usersTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
-//            @Override
-//            public void changed(ObservableValue observableValue, Object oldValue, Object newValue) {
-//                //Check whether item is selected and set value of selected item to Label
-//                if (usersTable.getSelectionModel().getSelectedItem() != null) {
-//                    TableViewSelectionModel selectionModel = usersTable.getSelectionModel();
-//                    ObservableList selectedCells = selectionModel.getSelectedCells();
-//                    TablePosition tablePosition = (TablePosition) selectedCells.get(0);
-//                    Object val = tablePosition.getTableColumn().getCellData(newValue);
-//
-//                    System.out.println("Selected Value: " + val);
-//
-//                }
-//            }
-//        });
-//        TablePosition pos = usersTable.getSelectionModel().getSelectedCells().get(0);
-//        int row = pos.getRow();
-//
-//// Item here is the table view type:
-//        User item = usersTable.getItems().get(row);
-//
-//        TableColumn col = pos.getTableColumn();
-//
-//// this gives the value in the selected cell:
-//        String data = (String) col.getCellObservableValue(item).getValue();
-//        System.out.println(data);
+        plantsTable.setPlaceholder(new Label("Usuário não possui plantações."));
         usersTable.setRowFactory(tv -> {
             TableRow<User> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
