@@ -73,18 +73,18 @@ public class DashBoard3Controller implements Initializable {
 
     @FXML
     private TableView<User> usersTable;
-    @FXML
-    private TableColumn<User, String> pID;
-    @FXML
-    private TableColumn<User, String> pName;
-    @FXML
-    private TableColumn<User, String> pOwner;
-    @FXML
-    private TableColumn<User, String> pAddress;
-    @FXML
-    private TableColumn<User, String> pCity;
-    @FXML
-    private TableColumn<User, String> pState;
+//    @FXML
+//    private TableColumn<User, String> pID;
+//    @FXML
+//    private TableColumn<User, String> pName;
+//    @FXML
+//    private TableColumn<User, String> pOwner;
+//    @FXML
+//    private TableColumn<User, String> pAddress;
+//    @FXML
+//    private TableColumn<User, String> pCity;
+//    @FXML
+//    private TableColumn<User, String> pState;
     @FXML
     private TableColumn<User, String> uID;
     @FXML
@@ -229,7 +229,7 @@ public class DashBoard3Controller implements Initializable {
             TableRow<User> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (!row.isEmpty() && event.getButton() == MouseButton.PRIMARY
-                        && event.getClickCount() == 2) {
+                        && event.getClickCount() == 1) {
 
                     User clickedRow = row.getItem();
                     printRow(clickedRow);

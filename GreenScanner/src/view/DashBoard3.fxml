@@ -7,7 +7,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="497.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.DashBoard3Controller">
+<AnchorPane id="AnchorPane" prefHeight="497.0" prefWidth="591.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.DashBoard3Controller">
     <children>
         <Button id="btnInsert" fx:id="button" layoutX="224.0" layoutY="33.0" onAction="#handleButtonAction" style="-fx-background-color: #5D995D; -fx-text-fill: #fff;" text="Cadastrar" />
         <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
@@ -20,26 +20,20 @@
                
                     
                 <TableColumn fx:id="uID" prefWidth="75.0" text="ID User" />
-                <TableColumn fx:id="uName" prefWidth="118.0" text="Name" />
-                <TableColumn fx:id="uTitle" prefWidth="96.0" text="Title" />
-                <TableColumn fx:id="uPermission" prefWidth="122.0" text="Permission" />
-                <TableColumn fx:id="uCreation" prefWidth="124.0" text="Creation" />
-                <TableColumn fx:id="pID" prefWidth="90.0" text="ID Plantation" />
-                <TableColumn fx:id="pName" prefWidth="75.0" text="Name" />
-                <TableColumn fx:id="pOwner" prefWidth="60.0" text="ID Owner" />
-                <TableColumn fx:id="pAddress" prefWidth="75.0" text="Address" />
-                <TableColumn fx:id="pCity" prefWidth="75.0" text="City" />
-                <TableColumn fx:id="pState" prefWidth="60.0" text="State" />         
+                <TableColumn fx:id="uName" prefWidth="113.0" text="Name" />
+                <TableColumn fx:id="uTitle" prefWidth="67.0" text="Title" />
+                <TableColumn fx:id="uPermission" prefWidth="125.0" text="Permission" />
+                <TableColumn fx:id="uCreation" maxWidth="205.0" prefWidth="190.0" text="Creation" />         
             </columns>
         </TableView>
       <TableView fx:id="plantsTable" layoutX="10.0" layoutY="359.0" prefHeight="124.0" prefWidth="478.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
         <columns>
-          <TableColumn fx:id="idField" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="idField" prefWidth="48.0" text="ID" />
           <TableColumn fx:id="id_ownerField" prefWidth="75.0" text="ID Owner" />
-            <TableColumn fx:id="pnameField" prefWidth="75.0" text="Name" />
-            <TableColumn fx:id="addressField" prefWidth="75.0" text="Address" />
-            <TableColumn fx:id="cityField" prefWidth="75.0" text="City" />
-            <TableColumn fx:id="stateField" prefWidth="75.0" text="State" />
+            <TableColumn fx:id="pnameField" prefWidth="131.0" text="Name" />
+            <TableColumn fx:id="addressField" prefWidth="88.0" text="Address" />
+            <TableColumn fx:id="cityField" prefWidth="82.0" text="City" />
+            <TableColumn fx:id="stateField" prefWidth="146.0" text="State" />
         </columns>
       </TableView>
     </children>
