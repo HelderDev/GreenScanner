@@ -18,6 +18,8 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,9 +27,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TablePosition;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
 import model.bean.Plantation;
 import model.bean.User;
@@ -49,6 +55,22 @@ public class DashBoard3Controller implements Initializable {
     private TextField titleField;
     @FXML
     private TextField nameField;
+
+    @FXML
+    private TableView<Plantation> plantsTable;
+    @FXML
+    private TableColumn<Plantation, String> idField;
+    @FXML
+    private TableColumn<Plantation, String> id_ownerField;
+    @FXML
+    private TableColumn<Plantation, String> pnameField;
+    @FXML
+    private TableColumn<Plantation, String> addressField;
+    @FXML
+    private TableColumn<Plantation, String> cityField;
+    @FXML
+    private TableColumn<Plantation, String> stateField;
+
     @FXML
     private TableView<User> usersTable;
     @FXML
@@ -74,7 +96,8 @@ public class DashBoard3Controller implements Initializable {
     @FXML
     private TableColumn<User, String> uCreation;
 
-    //ObservableList<Plantation> oblist = FXCollections.observableArrayList();
+    ObservableList<User> oblist = FXCollections.observableArrayList();
+
     //  UserDAO ud = new UserDAO();
     @FXML
     private void handleButtonAction(ActionEvent event) {
@@ -92,12 +115,35 @@ public class DashBoard3Controller implements Initializable {
 //        u.setCreation(formatter.format(date));
 //        dao.create(u);
 //        readTable();
+        ObservableList<User> oblistUser;
+
+        oblistUser = usersTable.getSelectionModel().getSelectedItems();
+
+        System.out.println(oblistUser.get(0).getId());
+    }
+
+    // usersTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+    //  @Override
+    // public void changed(ObservableValue observableValue, Object oldValue, Object newValue) {
+    //Check whether item is selected and set value of selected item to Label
+//        if(usersTable.getSelectionModel().getSelectedItem() != null) 
+//        {    
+//           TableViewSelectionModel selectionModel = usersTable.getSelectionModel();
+//           ObservableList selectedCells = selectionModel.getSelectedCells();
+//           TablePosition tablePosition = (TablePosition) selectedCells.get(0);
+//           Object val = tablePosition.getTableColumn().getCellData(newValue);
+//           System.out.println("Selected Value" + val);
+//         }
+    // });
+    @FXML
+    private void editTable(ActionEvent event) {
+        nameField.setText("A");
     }
 
     public void readTable() {
         usersTable.getItems().clear();
         UserDAO udao = new UserDAO();
-        for (User u : udao.readAll()) {
+        for (User u : udao.read()) {
 //            pID.setCellValueFactory(new PropertyValueFactory<>("id"));
 //            pName.setCellValueFactory(new PropertyValueFactory<>("name"));
 //            pOwner.setCellValueFactory(new PropertyValueFactory<>("id_owner"));
@@ -111,13 +157,39 @@ public class DashBoard3Controller implements Initializable {
             uPermission.setCellValueFactory(new PropertyValueFactory<>("permission"));
             uCreation.setCellValueFactory(new PropertyValueFactory<>("creation"));
             usersTable.getItems().add(u);
-            
-            
+
         }
-        
-       
+
         nameField.setText(owner);
         titleField.setText(title);
+    }
+
+    private void printRow(User item) {
+                plantsTable.getItems().clear();
+
+        PlantationDAO pdao = new PlantationDAO();
+
+        System.out.println(item.getId() + item.getPermission());
+
+        for (Plantation p : pdao.readAll(item.getId())) {
+//            pID.setCellValueFactory(new PropertyValueFactory<>("id"));
+//            pName.setCellValueFactory(new PropertyValueFactory<>("name"));
+//            pOwner.setCellValueFactory(new PropertyValueFactory<>("id_owner"));
+//            pAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
+//            pCity.setCellValueFactory(new PropertyValueFactory<>("city"));
+//            pState.setCellValueFactory(new PropertyValueFactory<>("state"));
+
+            idField.setCellValueFactory(new PropertyValueFactory<>("id"));
+            id_ownerField.setCellValueFactory(new PropertyValueFactory<>("id_owner"));
+            pnameField.setCellValueFactory(new PropertyValueFactory<>("name"));
+            addressField.setCellValueFactory(new PropertyValueFactory<>("address"));
+            cityField.setCellValueFactory(new PropertyValueFactory<>("city"));
+            stateField.setCellValueFactory(new PropertyValueFactory<>("state"));
+
+            plantsTable.getItems().add(p);
+
+        }
+
     }
 
     @Override
@@ -126,6 +198,47 @@ public class DashBoard3Controller implements Initializable {
         //  System.out.println("ID DashBoard: " + ud.getUser().getId());
 
         readTable();
+
+//        usersTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+//            @Override
+//            public void changed(ObservableValue observableValue, Object oldValue, Object newValue) {
+//                //Check whether item is selected and set value of selected item to Label
+//                if (usersTable.getSelectionModel().getSelectedItem() != null) {
+//                    TableViewSelectionModel selectionModel = usersTable.getSelectionModel();
+//                    ObservableList selectedCells = selectionModel.getSelectedCells();
+//                    TablePosition tablePosition = (TablePosition) selectedCells.get(0);
+//                    Object val = tablePosition.getTableColumn().getCellData(newValue);
+//
+//                    System.out.println("Selected Value: " + val);
+//
+//                }
+//            }
+//        });
+//        TablePosition pos = usersTable.getSelectionModel().getSelectedCells().get(0);
+//        int row = pos.getRow();
+//
+//// Item here is the table view type:
+//        User item = usersTable.getItems().get(row);
+//
+//        TableColumn col = pos.getTableColumn();
+//
+//// this gives the value in the selected cell:
+//        String data = (String) col.getCellObservableValue(item).getValue();
+//        System.out.println(data);
+        usersTable.setRowFactory(tv -> {
+            TableRow<User> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (!row.isEmpty() && event.getButton() == MouseButton.PRIMARY
+                        && event.getClickCount() == 2) {
+
+                    User clickedRow = row.getItem();
+                    printRow(clickedRow);
+                }
+            });
+            return row;
+        });
+        // ...
+
     }
 
 }

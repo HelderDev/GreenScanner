@@ -149,7 +149,7 @@ public class UserDAO {
         List<User> users = new ArrayList<>();
 
         try {
-            stmt = con.prepareStatement("select * from user u inner join plantation p on u.id = p.id_owner");
+            stmt = con.prepareStatement("select * from user u inner join plantation p on u.id = p.id_owner where ");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
