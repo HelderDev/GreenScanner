@@ -24,7 +24,9 @@ import model.bean.User;
 public class UserDAO {
 
     public static int idValue;
- 
+    public static String userName;
+    public static String titleName;
+
     public boolean checkLogin(String login, String senha) {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
@@ -49,10 +51,12 @@ public class UserDAO {
 //                u.setPermission(rs.getInt("permission"));
 //                u.setCreation(rs.getString("creation"));;
 //                System.out.println("USERDAO ID: " + u.getId());
-             //   User u = new User(rs.getInt("id"));
+                //   User u = new User(rs.getInt("id"));
                 idValue = rs.getInt("id");
-                System.out.println("USERDAO GETUSER: " + idValue);
-            }
+                userName = rs.getString("name");
+                titleName = rs.getString("title");
+                System.out.println("USNAME "+rs.getString("name"));
+             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao acessar o banco" + ex);
 
@@ -140,7 +144,7 @@ public class UserDAO {
         return users;
     }
 
-        public List<User> readAll() {
+    public List<User> readAll() {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
 
@@ -170,7 +174,7 @@ public class UserDAO {
 
         return users;
     }
-    
+
     public void update(User u) {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;

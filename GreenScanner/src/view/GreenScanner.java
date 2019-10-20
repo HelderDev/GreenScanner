@@ -6,12 +6,14 @@
 package view;
 
 import com.machinezoo.sourceafis.FingerprintTemplate;
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -19,16 +21,17 @@ import javafx.stage.Stage;
  * @author hdrhe
  */
 public class GreenScanner extends Application {
-    
+
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
-        
-        Scene scene = new Scene(root);
-        
-        stage.setScene(scene);
-        stage.show();
 
+        Scene scene = new Scene(root);
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("images/sprout.png")));
+        stage.titleProperty().setValue("Login");
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
     }
 
     /**
@@ -37,5 +40,5 @@ public class GreenScanner extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }

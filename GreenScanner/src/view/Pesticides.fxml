@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="137.0" prefWidth="402.0" style="-fx-background-color: #f6ecbf;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.PesticidesController">
+   <children>
+      <TableView fx:id="pestTable" prefHeight="137.0" prefWidth="403.0" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="6.0">
+        <columns>
+          <TableColumn fx:id="pesticida" prefWidth="308.0" text="Pesticida" />
+          <TableColumn fx:id="permissao" prefWidth="92.0" text="Permissão" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

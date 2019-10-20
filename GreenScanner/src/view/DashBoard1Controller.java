@@ -36,6 +36,8 @@ import static model.dao.PlantationDAO.owner;
 import static model.dao.PlantationDAO.title;
 import model.dao.UserDAO;
 import static model.dao.UserDAO.idValue;
+import static model.dao.UserDAO.titleName;
+import static model.dao.UserDAO.userName;
 
 /**
  *
@@ -44,19 +46,14 @@ import static model.dao.UserDAO.idValue;
 public class DashBoard1Controller implements Initializable {
     
     @FXML
-    private Label label;
-    @FXML
-    private TextField titleField;
-    @FXML
-    private TextField nameField;
+    private Label welcomeLabel;
     @FXML
     private TableView<Plantation> plantsTable;
     @FXML
     private TableColumn<Plantation, String> id;
     @FXML
     private TableColumn<Plantation, String> name;
-    @FXML
-    private TableColumn<Plantation, String> id_owner;
+  
     @FXML
     private TableColumn<Plantation, String> address;
     @FXML
@@ -65,25 +62,6 @@ public class DashBoard1Controller implements Initializable {
     private TableColumn<Plantation, String> state;
     
     ObservableList<User> oblist = FXCollections.observableArrayList();
-
-    //  UserDAO ud = new UserDAO();
-    @FXML
-    private void handleButtonAction(ActionEvent event) {
-//
-//        Date date = new Date();
-//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//
-//        //User u = new User();
-//        Plantation p = new Plantation();
-//        UserDAO dao = new UserDAO();
-//        u.setTitle(titleField.getText());
-//        u.setName(nameField.getText());
-//
-//        u.setPermission(1);
-//        u.setCreation(formatter.format(date));
-//        dao.create(u);
-//        readTable();
-    }
     
     public void readTable(int u) {
         plantsTable.getItems().clear();
@@ -91,22 +69,21 @@ public class DashBoard1Controller implements Initializable {
         for (Plantation p : pdao.read(u)) {
             this.id.setCellValueFactory(new PropertyValueFactory<>("id"));
             name.setCellValueFactory(new PropertyValueFactory<>("name"));
-            id_owner.setCellValueFactory(new PropertyValueFactory<>("id_owner"));
+          //  id_owner.setCellValueFactory(new PropertyValueFactory<>("id_owner"));
             address.setCellValueFactory(new PropertyValueFactory<>("address"));
             city.setCellValueFactory(new PropertyValueFactory<>("city"));
             state.setCellValueFactory(new PropertyValueFactory<>("state"));
             
             plantsTable.getItems().add(p);
         }
-        nameField.setText(owner);
-       titleField.setText(title);
+        
     }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         //  System.out.println("ID DashBoard: " + ud.getUser().getId());
-
+        welcomeLabel.setText("Bem vindo " + titleName + " " + userName);
         readTable(idValue);
     }
     

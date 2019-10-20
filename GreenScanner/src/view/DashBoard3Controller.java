@@ -24,7 +24,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TablePosition;
@@ -33,15 +37,22 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 import model.bean.Plantation;
+import model.bean.PlantationPesticide;
+import static model.bean.PlantationPesticide.id_plantation;
 import model.bean.User;
 import model.dao.PlantationDAO;
 import static model.dao.PlantationDAO.owner;
 import static model.dao.PlantationDAO.title;
+import model.dao.PlantationPesticideDAO;
 import model.dao.UserDAO;
 import static model.dao.UserDAO.idValue;
+import static model.dao.UserDAO.titleName;
+import static model.dao.UserDAO.userName;
 
 /**
  *
@@ -50,11 +61,7 @@ import static model.dao.UserDAO.idValue;
 public class DashBoard3Controller implements Initializable {
 
     @FXML
-    private Label label;
-    @FXML
-    private TextField titleField;
-    @FXML
-    private TextField nameField;
+    private Label welcomeLabel;
 
     @FXML
     private TableView<Plantation> plantsTable;
@@ -101,20 +108,7 @@ public class DashBoard3Controller implements Initializable {
     //  UserDAO ud = new UserDAO();
     @FXML
     private void handleButtonAction(ActionEvent event) {
-//
-//        Date date = new Date();
-//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//
-//        //User u = new User();
-//        Plantation p = new Plantation();
-//        UserDAO dao = new UserDAO();
-//        u.setTitle(titleField.getText());
-//        u.setName(nameField.getText());
-//
-//        u.setPermission(1);
-//        u.setCreation(formatter.format(date));
-//        dao.create(u);
-//        readTable();
+
         ObservableList<User> oblistUser;
 
         oblistUser = usersTable.getSelectionModel().getSelectedItems();
@@ -122,34 +116,10 @@ public class DashBoard3Controller implements Initializable {
         System.out.println(oblistUser.get(0).getId());
     }
 
-    // usersTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
-    //  @Override
-    // public void changed(ObservableValue observableValue, Object oldValue, Object newValue) {
-    //Check whether item is selected and set value of selected item to Label
-//        if(usersTable.getSelectionModel().getSelectedItem() != null) 
-//        {    
-//           TableViewSelectionModel selectionModel = usersTable.getSelectionModel();
-//           ObservableList selectedCells = selectionModel.getSelectedCells();
-//           TablePosition tablePosition = (TablePosition) selectedCells.get(0);
-//           Object val = tablePosition.getTableColumn().getCellData(newValue);
-//           System.out.println("Selected Value" + val);
-//         }
-    // });
-    @FXML
-    private void editTable(ActionEvent event) {
-        nameField.setText("A");
-    }
-
     public void readTable() {
         usersTable.getItems().clear();
         UserDAO udao = new UserDAO();
         for (User u : udao.read()) {
-//            pID.setCellValueFactory(new PropertyValueFactory<>("id"));
-//            pName.setCellValueFactory(new PropertyValueFactory<>("name"));
-//            pOwner.setCellValueFactory(new PropertyValueFactory<>("id_owner"));
-//            pAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
-//            pCity.setCellValueFactory(new PropertyValueFactory<>("city"));
-//            pState.setCellValueFactory(new PropertyValueFactory<>("state"));
 
             uID.setCellValueFactory(new PropertyValueFactory<>("id"));
             uName.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -160,8 +130,6 @@ public class DashBoard3Controller implements Initializable {
 
         }
 
-        nameField.setText(owner);
-        titleField.setText(title);
     }
 
     private void printRow(User item) {
@@ -172,12 +140,6 @@ public class DashBoard3Controller implements Initializable {
         System.out.println(item.getId() + item.getPermission());
 
         for (Plantation p : pdao.readAll(item.getId())) {
-//            pID.setCellValueFactory(new PropertyValueFactory<>("id"));
-//            pName.setCellValueFactory(new PropertyValueFactory<>("name"));
-//            pOwner.setCellValueFactory(new PropertyValueFactory<>("id_owner"));
-//            pAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
-//            pCity.setCellValueFactory(new PropertyValueFactory<>("city"));
-//            pState.setCellValueFactory(new PropertyValueFactory<>("state"));
 
             idField.setCellValueFactory(new PropertyValueFactory<>("id"));
             id_ownerField.setCellValueFactory(new PropertyValueFactory<>("id_owner"));
@@ -192,9 +154,37 @@ public class DashBoard3Controller implements Initializable {
 
     }
 
+    private void showPesticides(Plantation item) {
+        id_plantation = item.getId();
+        PlantationPesticideDAO pdao = new PlantationPesticideDAO();
+        //PlantationPesticide plantPest = new PlantationPesticide(item.getId());
+        Stage stage = new Stage();
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("images/fertilizer.png")));
+        stage.titleProperty().setValue("Pesticidas");
+        stage.setResizable(false);
+
+        try {
+
+            Parent root = FXMLLoader.load(getClass().getResource("Pesticides.fxml"));
+
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+            // Hide this current window (if this is what you want)
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        for (PlantationPesticide p : pdao.pesticides(item.getId())) {
+            PesticidesController pest = new PesticidesController();
+            pest.readTable(item.getId());
+
+        }
+
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        welcomeLabel.setText("Bem-vindo " + titleName + " " + userName + "!");
         readTable();
         uID.setStyle("-fx-alignment: CENTER;");
         uPermission.setStyle("-fx-alignment: CENTER;");
@@ -202,6 +192,7 @@ public class DashBoard3Controller implements Initializable {
         id_ownerField.setStyle("-fx-alignment: CENTER;");
 
         plantsTable.setPlaceholder(new Label("Usuário não possui plantações."));
+
         usersTable.setRowFactory(tv -> {
             TableRow<User> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
@@ -210,6 +201,19 @@ public class DashBoard3Controller implements Initializable {
 
                     User clickedRow = row.getItem();
                     printRow(clickedRow);
+                }
+            });
+            return row;
+        });
+
+        plantsTable.setRowFactory(tv -> {
+            TableRow<Plantation> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (!row.isEmpty() && event.getButton() == MouseButton.PRIMARY
+                        && event.getClickCount() == 2) {
+
+                    Plantation clickedRow = row.getItem();
+                    showPesticides(clickedRow);
                 }
             });
             return row;

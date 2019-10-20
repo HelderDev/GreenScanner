@@ -31,10 +31,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 import model.bean.User;
 import model.dao.UserDAO;
+import static model.dao.UserDAO.titleName;
+import static model.dao.UserDAO.userName;
 
 /**
  *
@@ -46,7 +49,6 @@ public class LoginController implements Initializable {
     private TextField idField;
     @FXML
     private TextField nameField;
-   
 
     @FXML
     private void handleButtonAction(ActionEvent event) {
@@ -54,10 +56,13 @@ public class LoginController implements Initializable {
 //        label.setText("Hello World!");
 
         Stage stage = new Stage();
-
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("images/sprout.png")));
+        stage.titleProperty().setValue("DashBoard");
+ 
         UserDAO dao = new UserDAO();
 
         if (dao.checkLogin(nameField.getText(), idField.getText())) {
+
             switch (dao.checkPermission(nameField.getText(), idField.getText())) {
                 case 1:
                     try {
@@ -66,7 +71,7 @@ public class LoginController implements Initializable {
                         Scene scene = new Scene(root);
                         stage.setScene(scene);
                         stage.show();
-                       
+
                         // Hide this current window (if this is what you want)
                         ((Node) (event.getSource())).getScene().getWindow().hide();
                     } catch (IOException e) {
@@ -113,6 +118,7 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+
     }
 
 }
