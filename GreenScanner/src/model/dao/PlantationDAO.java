@@ -88,10 +88,9 @@ public class PlantationDAO {
                 plant.setAddress(rs.getString("p.address"));
                 plant.setCity(rs.getString("p.city"));
                 plant.setState(rs.getString("p.state"));
-
                 plants.add(plant);
 
-             }
+            }
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao acessar o banco" + ex);

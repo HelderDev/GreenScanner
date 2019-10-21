@@ -79,7 +79,7 @@ public class DashBoard3Controller implements Initializable {
 
     @FXML
     private TableView<User> usersTable;
- 
+
     @FXML
     private TableColumn<User, String> uID;
     @FXML
@@ -95,13 +95,31 @@ public class DashBoard3Controller implements Initializable {
 
     //  UserDAO ud = new UserDAO();
     @FXML
-    private void handleButtonAction(ActionEvent event) {
+    private void logout(ActionEvent event) {
+        Stage stage = new Stage();
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("images/sprout.png")));
+        stage.titleProperty().setValue("Login");
+        stage.setResizable(false);
+        String[] options = new String[2];
+        options[0] = "Sim";
+        options[1] = "Não";
+        int x = JOptionPane.showOptionDialog(null, "Desconectar?",
+                "Click a button",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+         if (x == 0) {
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
 
-        ObservableList<User> oblistUser;
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
 
-        oblistUser = usersTable.getSelectionModel().getSelectedItems();
-
-        System.out.println(oblistUser.get(0).getId());
+                // Hide this current window (if this is what you want)
+                ((Node) (event.getSource())).getScene().getWindow().hide();
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
     }
 
     public void readTable() {
@@ -125,11 +143,10 @@ public class DashBoard3Controller implements Initializable {
 
         PlantationDAO pdao = new PlantationDAO();
 
- 
         for (Plantation p : pdao.readAll(item.getId())) {
 
             idField.setCellValueFactory(new PropertyValueFactory<>("id"));
-    //        id_ownerField.setCellValueFactory(new PropertyValueFactory<>("id_owner"));
+            //        id_ownerField.setCellValueFactory(new PropertyValueFactory<>("id_owner"));
             pnameField.setCellValueFactory(new PropertyValueFactory<>("name"));
             addressField.setCellValueFactory(new PropertyValueFactory<>("address"));
             cityField.setCellValueFactory(new PropertyValueFactory<>("city"));
@@ -176,7 +193,7 @@ public class DashBoard3Controller implements Initializable {
         uID.setStyle("-fx-alignment: CENTER;");
         uPermission.setStyle("-fx-alignment: CENTER;");
         idField.setStyle("-fx-alignment: CENTER;");
-     //   id_ownerField.setStyle("-fx-alignment: CENTER;");
+        //   id_ownerField.setStyle("-fx-alignment: CENTER;");
 
         plantsTable.setPlaceholder(new Label("Usuário não possui plantações."));
 
