@@ -67,8 +67,7 @@ public class DashBoard3Controller implements Initializable {
     private TableView<Plantation> plantsTable;
     @FXML
     private TableColumn<Plantation, String> idField;
-    @FXML
-    private TableColumn<Plantation, String> id_ownerField;
+
     @FXML
     private TableColumn<Plantation, String> pnameField;
     @FXML
@@ -80,18 +79,7 @@ public class DashBoard3Controller implements Initializable {
 
     @FXML
     private TableView<User> usersTable;
-//    @FXML
-//    private TableColumn<User, String> pID;
-//    @FXML
-//    private TableColumn<User, String> pName;
-//    @FXML
-//    private TableColumn<User, String> pOwner;
-//    @FXML
-//    private TableColumn<User, String> pAddress;
-//    @FXML
-//    private TableColumn<User, String> pCity;
-//    @FXML
-//    private TableColumn<User, String> pState;
+ 
     @FXML
     private TableColumn<User, String> uID;
     @FXML
@@ -141,7 +129,7 @@ public class DashBoard3Controller implements Initializable {
         for (Plantation p : pdao.readAll(item.getId())) {
 
             idField.setCellValueFactory(new PropertyValueFactory<>("id"));
-            id_ownerField.setCellValueFactory(new PropertyValueFactory<>("id_owner"));
+    //        id_ownerField.setCellValueFactory(new PropertyValueFactory<>("id_owner"));
             pnameField.setCellValueFactory(new PropertyValueFactory<>("name"));
             addressField.setCellValueFactory(new PropertyValueFactory<>("address"));
             cityField.setCellValueFactory(new PropertyValueFactory<>("city"));
@@ -188,7 +176,7 @@ public class DashBoard3Controller implements Initializable {
         uID.setStyle("-fx-alignment: CENTER;");
         uPermission.setStyle("-fx-alignment: CENTER;");
         idField.setStyle("-fx-alignment: CENTER;");
-        id_ownerField.setStyle("-fx-alignment: CENTER;");
+     //   id_ownerField.setStyle("-fx-alignment: CENTER;");
 
         plantsTable.setPlaceholder(new Label("Usuário não possui plantações."));
 

@@ -12,7 +12,7 @@
 <AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="597.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.DashBoard3Controller">
     <children>
         <Label fx:id="welcomeLabel" layoutX="11.0" layoutY="7.0" prefHeight="26.0" prefWidth="569.0" style="-fx-font-size: 13px;" text="Mensagem de boas vindas" textFill="#000000a4" AnchorPane.bottomAnchor="485.0" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="15.0" />
-        <AnchorPane id="paneUsuarios" layoutY="47.0" prefHeight="261.0" prefWidth="597.0" style="-fx-background-color: #e7f0ed;" AnchorPane.bottomAnchor="213.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="44.0">
+        <AnchorPane id="paneUsuarios" layoutY="47.0" prefHeight="261.0" prefWidth="597.0" style="-fx-background-color: #e7f0ed;" AnchorPane.bottomAnchor="213.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="42.0">
             <children>
                 <TableView fx:id="usersTable" layoutX="10.0" prefHeight="195.0" prefWidth="585.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="40.0">
                     <columns>
@@ -22,7 +22,7 @@
                         <TableColumn fx:id="uName" prefWidth="150.0" text="Nome" />
                         <TableColumn fx:id="uTitle" prefWidth="124.0" text="Título" />
                         <TableColumn fx:id="uPermission" prefWidth="68.0" text="Permissão" />
-                        <TableColumn fx:id="uCreation" maxWidth="205.0" prefWidth="194.0" text="Data de Admissão" />         
+                        <TableColumn fx:id="uCreation" maxWidth="205.0" prefWidth="202.0" text="Data de Admissão" />         
                     </columns>
                 </TableView>
             <Label layoutX="38.0" layoutY="13.0" style="-fx-font-size: 13px; -fx-font-weight: bold;" text="Usuários" textFill="#0000009e" AnchorPane.leftAnchor="38.0" AnchorPane.rightAnchor="463.0" AnchorPane.topAnchor="13.0">
@@ -35,19 +35,18 @@
                   <Image url="@images/group.png" />
                </image>
             </ImageView>
-            <Separator prefWidth="200.0" AnchorPane.bottomAnchor="258.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <Separator prefWidth="200.0" AnchorPane.bottomAnchor="259.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
             </children>
         </AnchorPane>
-        <AnchorPane layoutX="-1.0" layoutY="300.0" prefHeight="197.0" prefWidth="597.0" style="-fx-background-color: #f3fce3;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300.0">
+        <AnchorPane layoutX="-1.0" layoutY="300.0" prefHeight="197.0" prefWidth="597.0" style="-fx-background-color: #f3fce3;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="301.0">
             <children>
                 <TableView fx:id="plantsTable" layoutX="7.0" layoutY="-4.0" prefHeight="135.0" prefWidth="577.0" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="40.0">
                     <columns>
                         <TableColumn fx:id="idField" prefWidth="40.0" text="ID" />
-                        <TableColumn fx:id="id_ownerField" prefWidth="108.0" text="ID do Proprietário" />
-                        <TableColumn fx:id="pnameField" prefWidth="106.0" text="Nome" />
-                        <TableColumn fx:id="addressField" prefWidth="88.0" text="Endereço" />
-                        <TableColumn fx:id="cityField" prefWidth="82.0" text="Cidade" />
-                        <TableColumn fx:id="stateField" prefWidth="152.0" text="Estado" />
+                        <TableColumn fx:id="pnameField" prefWidth="116.0" text="Nome" />
+                        <TableColumn fx:id="addressField" prefWidth="133.0" text="Endereço" />
+                        <TableColumn fx:id="cityField" prefWidth="140.0" text="Cidade" />
+                        <TableColumn fx:id="stateField" prefWidth="155.0" text="Estado" />
                     </columns>
                 </TableView>
             <Separator prefWidth="589.0" AnchorPane.bottomAnchor="215.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
