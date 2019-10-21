@@ -58,7 +58,8 @@ public class LoginController implements Initializable {
         Stage stage = new Stage();
         stage.getIcons().add(new Image(getClass().getResourceAsStream("images/sprout.png")));
         stage.titleProperty().setValue("DashBoard");
- 
+       // stage.setResizable(false);
+                                     
         UserDAO dao = new UserDAO();
 
         if (dao.checkLogin(nameField.getText(), idField.getText())) {

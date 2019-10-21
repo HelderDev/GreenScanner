@@ -50,13 +50,11 @@ public class UserDAO {
 //                u.setTitle(rs.getString("title"));
 //                u.setPermission(rs.getInt("permission"));
 //                u.setCreation(rs.getString("creation"));;
-//                System.out.println("USERDAO ID: " + u.getId());
-                //   User u = new User(rs.getInt("id"));
+                 //   User u = new User(rs.getInt("id"));
                 idValue = rs.getInt("id");
                 userName = rs.getString("name");
                 titleName = rs.getString("title");
-                System.out.println("USNAME "+rs.getString("name"));
-             }
+              }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao acessar o banco" + ex);
 

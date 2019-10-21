@@ -137,8 +137,7 @@ public class DashBoard3Controller implements Initializable {
 
         PlantationDAO pdao = new PlantationDAO();
 
-        System.out.println(item.getId() + item.getPermission());
-
+ 
         for (Plantation p : pdao.readAll(item.getId())) {
 
             idField.setCellValueFactory(new PropertyValueFactory<>("id"));

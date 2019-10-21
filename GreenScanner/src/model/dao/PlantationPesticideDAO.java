@@ -52,11 +52,9 @@ public class PlantationPesticideDAO {
                     plant.setAllowed("✖");
 
                 }
-                //  plant.setAllowed(rs.getString("allowed"));
-                plants.add(plant);
+                 plants.add(plant);
 
-                //System.out.println("XX " + plant.getuID());
-            }
+             }
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao acessar o banco" + ex);
