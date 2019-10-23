@@ -22,13 +22,19 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 import model.bean.Plantation;
 import model.bean.User;
 import model.dao.PlantationDAO;
@@ -44,7 +50,7 @@ import static model.dao.UserDAO.userName;
  * @author hdrhe
  */
 public class DashBoard1Controller implements Initializable {
-    
+
     @FXML
     private Label welcomeLabel;
     @FXML
@@ -53,32 +59,60 @@ public class DashBoard1Controller implements Initializable {
     private TableColumn<Plantation, String> id;
     @FXML
     private TableColumn<Plantation, String> name;
-  
+
     @FXML
     private TableColumn<Plantation, String> address;
     @FXML
     private TableColumn<Plantation, String> city;
     @FXML
     private TableColumn<Plantation, String> state;
-    
+
     ObservableList<User> oblist = FXCollections.observableArrayList();
-    
+
     public void readTable(int u) {
         plantsTable.getItems().clear();
         PlantationDAO pdao = new PlantationDAO();
         for (Plantation p : pdao.read(u)) {
             this.id.setCellValueFactory(new PropertyValueFactory<>("id"));
             name.setCellValueFactory(new PropertyValueFactory<>("name"));
-          //  id_owner.setCellValueFactory(new PropertyValueFactory<>("id_owner"));
+            //  id_owner.setCellValueFactory(new PropertyValueFactory<>("id_owner"));
             address.setCellValueFactory(new PropertyValueFactory<>("address"));
             city.setCellValueFactory(new PropertyValueFactory<>("city"));
             state.setCellValueFactory(new PropertyValueFactory<>("state"));
-            
+
             plantsTable.getItems().add(p);
         }
-        
+
     }
-    
+
+    @FXML
+    private void logout(ActionEvent event) {
+        Stage stage = new Stage();
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("images/sprout.png")));
+        stage.titleProperty().setValue("Login");
+        stage.setResizable(false);
+        String[] options = new String[2];
+        options[0] = "Sim";
+        options[1] = "Não";
+        int x = JOptionPane.showOptionDialog(null, "Desconectar?",
+                "Click a button",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+        if (x == 0) {
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+
+                // Hide this current window (if this is what you want)
+                ((Node) (event.getSource())).getScene().getWindow().hide();
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -86,5 +120,5 @@ public class DashBoard1Controller implements Initializable {
         welcomeLabel.setText("Bem vindo " + titleName + " " + userName);
         readTable(idValue);
     }
-    
+
 }

@@ -106,7 +106,7 @@ public class DashBoard2Controller implements Initializable {
         int x = JOptionPane.showOptionDialog(null, "Desconectar?",
                 "Click a button",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
-         if (x == 0) {
+        if (x == 0) {
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
 
@@ -138,21 +138,21 @@ public class DashBoard2Controller implements Initializable {
 
     }
 
-    private void printRow(User item) {
-        plantsTable.getItems().clear();
+    private void printRow(Plantation item) {
+        usersTable.getItems().clear();
+        System.out.println(item.getId());
+        UserDAO udao = new UserDAO();
+        System.out.println(item.getId());
+        for (User u : udao.readRow(item.getId())) {
 
-        PlantationDAO pdao = new PlantationDAO();
-
-        for (Plantation p : pdao.readAll(item.getId())) {
-
-            idField.setCellValueFactory(new PropertyValueFactory<>("id"));
+            uID.setCellValueFactory(new PropertyValueFactory<>("id"));
             //        id_ownerField.setCellValueFactory(new PropertyValueFactory<>("id_owner"));
-            pnameField.setCellValueFactory(new PropertyValueFactory<>("name"));
-            addressField.setCellValueFactory(new PropertyValueFactory<>("address"));
-            cityField.setCellValueFactory(new PropertyValueFactory<>("city"));
-            stateField.setCellValueFactory(new PropertyValueFactory<>("state"));
+            uName.setCellValueFactory(new PropertyValueFactory<>("name"));
+            uTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
+            uPermission.setCellValueFactory(new PropertyValueFactory<>("permission"));
+            uCreation.setCellValueFactory(new PropertyValueFactory<>("creation"));
 
-            plantsTable.getItems().add(p);
+            usersTable.getItems().add(u);
 
         }
 
@@ -186,43 +186,54 @@ public class DashBoard2Controller implements Initializable {
 
     }
 
+    public void readPlantations(int u) {
+        plantsTable.getItems().clear();
+        PlantationDAO pdao = new PlantationDAO();
+        for (Plantation p : pdao.readPlantations(u)) {
+            idField.setCellValueFactory(new PropertyValueFactory<>("id"));
+            //        id_ownerField.setCellValueFactory(new PropertyValueFactory<>("id_owner"));
+            pnameField.setCellValueFactory(new PropertyValueFactory<>("name"));
+            addressField.setCellValueFactory(new PropertyValueFactory<>("address"));
+            cityField.setCellValueFactory(new PropertyValueFactory<>("city"));
+            stateField.setCellValueFactory(new PropertyValueFactory<>("state"));
+
+            plantsTable.getItems().add(p);
+        }
+
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+ 
         welcomeLabel.setText("Bem-vindo " + titleName + " " + userName + "!");
-        readTable();
+        readPlantations(idValue);
         uID.setStyle("-fx-alignment: CENTER;");
         uPermission.setStyle("-fx-alignment: CENTER;");
         idField.setStyle("-fx-alignment: CENTER;");
         //   id_ownerField.setStyle("-fx-alignment: CENTER;");
 
-        plantsTable.setPlaceholder(new Label("Usuário não possui plantações."));
-
-        usersTable.setRowFactory(tv -> {
-            TableRow<User> row = new TableRow<>();
-            row.setOnMouseClicked(event -> {
-                if (!row.isEmpty() && event.getButton() == MouseButton.PRIMARY
-                        && event.getClickCount() == 1) {
-
-                    User clickedRow = row.getItem();
-                    printRow(clickedRow);
-                }
-            });
-            return row;
-        });
-
-        plantsTable.setRowFactory(tv -> {
+        usersTable.setPlaceholder(new Label("Selecione uma plantação."));
+         plantsTable.setRowFactory(tv -> {
+            System.out.println("teste");
             TableRow<Plantation> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (!row.isEmpty() && event.getButton() == MouseButton.PRIMARY
+                        && event.getClickCount() == 1) {
+                     Plantation clickedRow = row.getItem();
+                    printRow(clickedRow);
+                }
+                else if (!row.isEmpty() && event.getButton() == MouseButton.PRIMARY
                         && event.getClickCount() == 2) {
 
                     Plantation clickedRow = row.getItem();
                     showPesticides(clickedRow);
                 }
             });
+       
             return row;
         });
-        // ...
+
+ 
 
     }
 

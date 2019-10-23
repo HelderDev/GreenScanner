@@ -50,11 +50,11 @@ public class UserDAO {
 //                u.setTitle(rs.getString("title"));
 //                u.setPermission(rs.getInt("permission"));
 //                u.setCreation(rs.getString("creation"));;
-                 //   User u = new User(rs.getInt("id"));
+                //   User u = new User(rs.getInt("id"));
                 idValue = rs.getInt("id");
                 userName = rs.getString("name");
                 titleName = rs.getString("title");
-              }
+            }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao acessar o banco" + ex);
 
@@ -121,6 +121,40 @@ public class UserDAO {
 
         try {
             stmt = con.prepareStatement("SELECT * FROM user");
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                User user = new User(rs.getInt("id"));
+                user.setId(rs.getInt("id"));
+                user.setName(rs.getString("name"));
+                user.setTitle(rs.getString("title"));
+                user.setPermission(rs.getInt("permission"));
+                user.setCreation(rs.getString("creation"));
+                users.add(user);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao acessar o banco" + ex);
+
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+
+        return users;
+    }
+
+    public List<User> readRow(int u) {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+
+        ResultSet rs = null;
+
+        List<User> users = new ArrayList<>();
+
+        try {
+            String sql = "select u.id, u.name, u.title, u.permission, u.creation "
+                    + "from user u inner join plantation p on u.id = p.id_owner where p.id = ?";
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, u);
             rs = stmt.executeQuery();
 
             while (rs.next()) {

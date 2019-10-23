@@ -64,6 +64,47 @@ public class PlantationDAO {
         return plants;
     }
 
+    public List<Plantation> readPlantations(int u) {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+
+        ResultSet rs = null;
+
+        List<Plantation> plants = new ArrayList<>();
+
+        try {
+            String sql = "select u.name, u.title, p.id, p.id_owner, p.name, p.address, p.city, p.state "
+                    + "from user u inner join plantation_permission pp "
+                    + "inner join plantation p on u.id = pp.id_user and pp.id_plantation = p.id where u.permission = 2 and u.id = ?";
+
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, u);
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Plantation plant = new Plantation();
+                plant.setId(rs.getInt("p.id"));
+                plant.setName(rs.getString("p.name"));
+                plant.setId_owner(rs.getInt("p.id_owner"));
+                plant.setAddress(rs.getString("p.address"));
+                plant.setCity(rs.getString("p.city"));
+                plant.setState(rs.getString("p.state"));
+                plant.setuName(rs.getString("u.name"));
+                plant.setuTitle(rs.getString("u.title"));
+                plants.add(plant);
+               
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao acessar o banco" + ex);
+
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+
+        return plants;
+    }
+
     public List<Plantation> readAll(int id) {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
@@ -19,6 +20,7 @@
                   <Insets />
                </opaqueInsets>
             </Separator>
+            <Hyperlink layoutX="551.0" layoutY="4.0" onAction="#logout" style="-fx-font-size: 10px;" text="Desconectar" textFill="#000000b7" AnchorPane.bottomAnchor="314.0" AnchorPane.leftAnchor="551.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="4.0" />
          </children></AnchorPane>
       <AnchorPane layoutX="-1.0" layoutY="42.0" prefHeight="295.0" prefWidth="624.0" style="-fx-background-color: #f3fce3;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="42.0">
          <children>
@@ -28,7 +30,7 @@
                   <TableColumn fx:id="name" prefWidth="140.0" text="Nome" />
                   <TableColumn fx:id="address" prefWidth="168.0" text="Endereço" />
                   <TableColumn fx:id="city" minWidth="0.0" prefWidth="133.0" text="Cidade" />
-                  <TableColumn fx:id="state" prefWidth="130.0" text="Estado" />
+                  <TableColumn fx:id="state" prefWidth="136.0" text="Estado" />
               </columns>
             </TableView>
             <ImageView fitHeight="25.0" fitWidth="37.0" layoutX="11.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="588.0" AnchorPane.topAnchor="5.0">

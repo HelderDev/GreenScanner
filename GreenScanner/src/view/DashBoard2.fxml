@@ -9,39 +9,15 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 
-<AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="597.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.DashBoard2Controller">
+<AnchorPane id="AnchorPane" prefHeight="496.0" prefWidth="597.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.DashBoard2Controller">
     <children>
-        <Label fx:id="welcomeLabel" layoutX="11.0" layoutY="7.0" prefHeight="19.0" prefWidth="393.0" style="-fx-font-size: 13px;" text="Mensagem de boas vindas" textFill="#000000a4" AnchorPane.bottomAnchor="485.0" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="193.0" AnchorPane.topAnchor="15.0" />
-        <AnchorPane id="paneUsuarios" layoutY="47.0" prefHeight="261.0" prefWidth="597.0" style="-fx-background-color: #e7f0ed;" AnchorPane.bottomAnchor="213.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="42.0">
+        <Label fx:id="welcomeLabel" layoutX="11.0" layoutY="7.0" prefHeight="40.0" prefWidth="597.0" style="-fx-font-size: 13px;" text="Mensagem de boas vindas" textFill="#000000a4" AnchorPane.bottomAnchor="483.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      
+ <Pane layoutY="42.0" prefHeight="364.0" prefWidth="585.0" style="-fx-background-color: #f3fce3;" AnchorPane.bottomAnchor="119.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="42.0">
             <children>
-                <TableView fx:id="usersTable" layoutX="10.0" prefHeight="195.0" prefWidth="585.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="40.0">
-                    <columns>
-                     
-                          
-                        <TableColumn fx:id="uID" prefWidth="40.0" text="ID" />
-                        <TableColumn fx:id="uName" prefWidth="150.0" text="Nome" />
-                        <TableColumn fx:id="uTitle" prefWidth="124.0" text="Título" />
-                        <TableColumn fx:id="uPermission" prefWidth="68.0" text="Permissão" />
-                        <TableColumn fx:id="uCreation" maxWidth="205.0" prefWidth="202.0" text="Data de Admissão" />         
-                    </columns>
-                </TableView>
-            <Label layoutX="38.0" layoutY="13.0" style="-fx-font-size: 13px; -fx-font-weight: bold;" text="Usuários" textFill="#0000009e" AnchorPane.leftAnchor="38.0" AnchorPane.rightAnchor="463.0" AnchorPane.topAnchor="13.0">
-               <padding>
-                  <Insets left="10.0" />
-               </padding>
-            </Label>
-            <ImageView fitHeight="63.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="551.0" AnchorPane.topAnchor="7.0">
-               <image>
-                  <Image url="@images/group.png" />
-               </image>
-            </ImageView>
-            <Separator prefWidth="200.0" AnchorPane.bottomAnchor="259.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-            </children>
-        </AnchorPane>
-        <AnchorPane layoutX="-1.0" layoutY="300.0" prefHeight="197.0" prefWidth="597.0" style="-fx-background-color: #f3fce3;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="301.0">
-            <children>
-                <TableView fx:id="plantsTable" layoutX="7.0" layoutY="-4.0" prefHeight="135.0" prefWidth="577.0" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="40.0">
+                <TableView fx:id="plantsTable" layoutX="6.0" layoutY="42.0" prefHeight="316.0" prefWidth="585.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="36.0">
                     <columns>
                         <TableColumn fx:id="idField" prefWidth="40.0" text="ID" />
                         <TableColumn fx:id="pnameField" prefWidth="116.0" text="Nome" />
@@ -50,19 +26,45 @@
                         <TableColumn fx:id="stateField" prefWidth="155.0" text="Estado" />
                     </columns>
                 </TableView>
-            <Separator prefWidth="589.0" AnchorPane.bottomAnchor="215.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-            <ImageView fitHeight="30.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="167.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="559.0" AnchorPane.topAnchor="7.0">
+            <Separator prefHeight="3.0" prefWidth="597.0" AnchorPane.bottomAnchor="361.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <ImageView fitHeight="30.0" fitWidth="37.0" layoutX="6.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="329.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="561.0" AnchorPane.topAnchor="5.0">
                <image>
                   <Image url="@images/scarecrow.png" />
                </image>
             </ImageView>
-            <Label prefHeight="30.0" prefWidth="88.0" style="-fx-font-size: 13px; -fx-font-weight: bold;" text="Plantações" textFill="#0000009e" AnchorPane.bottomAnchor="180.0" AnchorPane.leftAnchor="36.0" AnchorPane.rightAnchor="471.0" AnchorPane.topAnchor="7.0">
+            <Label layoutX="29.0" layoutY="4.0" prefHeight="32.0" prefWidth="88.0" style="-fx-font-size: 13px; -fx-font-weight: bold;" text="Plantações" textFill="#0000009e" AnchorPane.bottomAnchor="328.0" AnchorPane.leftAnchor="29.0" AnchorPane.rightAnchor="480.0" AnchorPane.topAnchor="4.0">
                <padding>
                   <Insets left="10.0" />
                </padding>
             </Label>
             </children>
-        </AnchorPane>
-      <Hyperlink layoutX="514.0" layoutY="-3.0" onAction="#logout" style="-fx-font-size: 10px;" text="Desconectar" textFill="#000000b7" AnchorPane.bottomAnchor="486.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="-3.0" />
+        </Pane>
+
+        <Pane id="paneUsuarios" layoutY="406.0" prefHeight="119.0" prefWidth="597.0" style="-fx-background-color: #ffeaea;">
+            <children>
+                <TableView fx:id="usersTable" layoutX="6.0" layoutY="47.0" prefHeight="65.0" prefWidth="585.0">
+                    <columns>
+                        <TableColumn fx:id="uID" prefWidth="40.0" text="ID" />
+                        <TableColumn fx:id="uName" prefWidth="150.0" text="Nome" />
+                        <TableColumn fx:id="uTitle" prefWidth="124.0" text="Título" />
+                        <TableColumn fx:id="uPermission" prefWidth="68.0" text="Permissão" />
+                        <TableColumn fx:id="uCreation" maxWidth="205.0" prefWidth="202.0" text="Data de Admissão" />         
+                    </columns>
+                </TableView>
+            <Label layoutX="28.0" layoutY="15.0" style="-fx-font-size: 13px; -fx-font-weight: bold;" text="Responsável" textFill="#0000009e">
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="6.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/girl.png" />
+               </image>
+            </ImageView>
+            <Separator prefHeight="3.0" prefWidth="597.0" AnchorPane.bottomAnchor="259.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            </children>
+        </Pane>
+       
+      <Hyperlink layoutX="514.0" layoutY="-3.0" onAction="#logout" prefHeight="30.0" prefWidth="63.0" style="-fx-font-size: 10px;" text="Desconectar" textFill="#000000b7" AnchorPane.bottomAnchor="496.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="-3.0" />
     </children>
 </AnchorPane>
