@@ -77,10 +77,9 @@ public class DashBoard1Controller implements Initializable {
     public void readTable(int u) {
         plantsTable.getItems().clear();
         PlantationDAO pdao = new PlantationDAO();
-        for (Plantation p : pdao.read(u)) {
+        for (Plantation p : pdao.readByUser(u)) {
             this.id.setCellValueFactory(new PropertyValueFactory<>("id"));
             name.setCellValueFactory(new PropertyValueFactory<>("name"));
-            //  id_owner.setCellValueFactory(new PropertyValueFactory<>("id_owner"));
             address.setCellValueFactory(new PropertyValueFactory<>("address"));
             city.setCellValueFactory(new PropertyValueFactory<>("city"));
             state.setCellValueFactory(new PropertyValueFactory<>("state"));
@@ -90,10 +89,9 @@ public class DashBoard1Controller implements Initializable {
 
     }
 
-        private void showPesticides(Plantation item) {
+    private void showPesticides(Plantation item) {
         id_plantation = item.getId();
         PlantationPesticideDAO pdao = new PlantationPesticideDAO();
-        //PlantationPesticide plantPest = new PlantationPesticide(item.getId());
         Stage stage = new Stage();
         stage.getIcons().add(new Image(getClass().getResourceAsStream("images/fertilizer.png")));
         stage.titleProperty().setValue("Pesticidas");
@@ -106,7 +104,6 @@ public class DashBoard1Controller implements Initializable {
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-            // Hide this current window (if this is what you want)
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, e);
         }
@@ -117,8 +114,7 @@ public class DashBoard1Controller implements Initializable {
         }
 
     }
-    
-    
+
     @FXML
     private void logout(ActionEvent event) {
         Stage stage = new Stage();
@@ -128,8 +124,8 @@ public class DashBoard1Controller implements Initializable {
         String[] options = new String[2];
         options[0] = "Sim";
         options[1] = "Não";
-        int x = JOptionPane.showOptionDialog(null, "Desconectar?",
-                "Click a button",
+        int x = JOptionPane.showOptionDialog(null, "Tem certeza que quer desconectar?",
+                "Selecione uma opção",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
         if (x == 0) {
             try {
@@ -139,7 +135,6 @@ public class DashBoard1Controller implements Initializable {
                 stage.setScene(scene);
                 stage.show();
 
-                // Hide this current window (if this is what you want)
                 ((Node) (event.getSource())).getScene().getWindow().hide();
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(null, e);
@@ -149,12 +144,11 @@ public class DashBoard1Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        //  System.out.println("ID DashBoard: " + ud.getUser().getId());
+
         welcomeLabel.setText("Bem vindo " + titleName + " " + userName);
         readTable(idValue);
-        
-                plantsTable.setRowFactory(tv -> {
+
+        plantsTable.setRowFactory(tv -> {
             TableRow<Plantation> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (!row.isEmpty() && event.getButton() == MouseButton.PRIMARY
@@ -166,8 +160,7 @@ public class DashBoard1Controller implements Initializable {
             });
             return row;
         });
-        
-        
+
     }
 
 }

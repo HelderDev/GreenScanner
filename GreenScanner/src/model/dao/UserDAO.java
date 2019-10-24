@@ -111,7 +111,7 @@ public class UserDAO {
         }
     }
 
-    public List<User> read() {
+    public List<User> readAll() {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
 
@@ -176,7 +176,7 @@ public class UserDAO {
         return users;
     }
 
-    public List<User> readAll() {
+        public List<User> readLike(String u) {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
 
@@ -185,16 +185,18 @@ public class UserDAO {
         List<User> users = new ArrayList<>();
 
         try {
-            stmt = con.prepareStatement("select * from user u inner join plantation p on u.id = p.id_owner where ");
+            String sql = "select * from user where name like ?";
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, u+"%");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                User user = new User(rs.getInt("u.id"));
-                user.setId(rs.getInt("u.id"));
-                user.setName(rs.getString("u.name"));
-                user.setTitle(rs.getString("u.title"));
-                user.setPermission(rs.getInt("u.permission"));
-                user.setCreation(rs.getString("u.creation"));
+                User user = new User(rs.getInt("id"));
+                user.setId(rs.getInt("id"));
+                user.setName(rs.getString("name"));
+                user.setTitle(rs.getString("title"));
+                user.setPermission(rs.getInt("permission"));
+                user.setCreation(rs.getString("creation"));
                 users.add(user);
             }
         } catch (SQLException ex) {
@@ -206,6 +208,8 @@ public class UserDAO {
 
         return users;
     }
+    
+     
 
     public void update(User u) {
         Connection con = ConnectionFactory.getConnection();

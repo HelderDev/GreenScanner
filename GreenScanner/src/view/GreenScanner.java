@@ -5,10 +5,6 @@
  */
 package view;
 
-import com.machinezoo.sourceafis.FingerprintTemplate;
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
