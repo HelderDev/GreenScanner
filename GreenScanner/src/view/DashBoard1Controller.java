@@ -29,17 +29,22 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 import model.bean.Plantation;
+import model.bean.PlantationPesticide;
+import static model.bean.PlantationPesticide.id_plantation;
 import model.bean.User;
 import model.dao.PlantationDAO;
 import static model.dao.PlantationDAO.owner;
 import static model.dao.PlantationDAO.title;
+import model.dao.PlantationPesticideDAO;
 import model.dao.UserDAO;
 import static model.dao.UserDAO.idValue;
 import static model.dao.UserDAO.titleName;
@@ -85,6 +90,35 @@ public class DashBoard1Controller implements Initializable {
 
     }
 
+        private void showPesticides(Plantation item) {
+        id_plantation = item.getId();
+        PlantationPesticideDAO pdao = new PlantationPesticideDAO();
+        //PlantationPesticide plantPest = new PlantationPesticide(item.getId());
+        Stage stage = new Stage();
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("images/fertilizer.png")));
+        stage.titleProperty().setValue("Pesticidas");
+        stage.setResizable(false);
+
+        try {
+
+            Parent root = FXMLLoader.load(getClass().getResource("Pesticides.fxml"));
+
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+            // Hide this current window (if this is what you want)
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        for (PlantationPesticide p : pdao.pesticides(item.getId())) {
+            PesticidesController pest = new PesticidesController();
+            pest.readTable(item.getId());
+
+        }
+
+    }
+    
+    
     @FXML
     private void logout(ActionEvent event) {
         Stage stage = new Stage();
@@ -119,6 +153,21 @@ public class DashBoard1Controller implements Initializable {
         //  System.out.println("ID DashBoard: " + ud.getUser().getId());
         welcomeLabel.setText("Bem vindo " + titleName + " " + userName);
         readTable(idValue);
+        
+                plantsTable.setRowFactory(tv -> {
+            TableRow<Plantation> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (!row.isEmpty() && event.getButton() == MouseButton.PRIMARY
+                        && event.getClickCount() == 2) {
+
+                    Plantation clickedRow = row.getItem();
+                    showPesticides(clickedRow);
+                }
+            });
+            return row;
+        });
+        
+        
     }
 
 }
