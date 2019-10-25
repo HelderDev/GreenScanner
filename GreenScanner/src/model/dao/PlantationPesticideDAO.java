@@ -13,7 +13,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-import model.bean.Plantation;
 import model.bean.PlantationPesticide;
 
 /**
@@ -52,12 +51,12 @@ public class PlantationPesticideDAO {
                     plant.setAllowed("✖");
 
                 }
-                 plants.add(plant);
+                plants.add(plant);
 
-             }
+            }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao acessar o banco" + ex);
+            JOptionPane.showMessageDialog(null, "Erro ao acessar o banco: " + ex);
 
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);

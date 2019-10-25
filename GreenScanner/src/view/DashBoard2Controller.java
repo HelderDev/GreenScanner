@@ -187,6 +187,7 @@ public class DashBoard2Controller implements Initializable {
         uID.setStyle("-fx-alignment: CENTER;");
         uPermission.setStyle("-fx-alignment: CENTER;");
         idField.setStyle("-fx-alignment: CENTER;");
+        plantsTable.setPlaceholder(new Label("Usuário é responsável por nenhuma plantação."));
 
         usersTable.setPlaceholder(new Label("Selecione uma plantação."));
         plantsTable.setRowFactory(tv -> {

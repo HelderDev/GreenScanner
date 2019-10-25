@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -24,6 +25,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
@@ -181,12 +183,9 @@ public class DashBoard3Controller implements Initializable {
 
     }
 
-    @FXML
-    private void find(ActionEvent event) {
-        readLike(searchField.getText());
-        searchField.setText("");
-    }
+    
 
+    @FXML
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         welcomeLabel.setText("Bem-vindo " + titleName + " " + userName + "!");
@@ -222,6 +221,13 @@ public class DashBoard3Controller implements Initializable {
                 }
             });
             return row;
+        });
+
+        searchField.addEventFilter(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
+            public void handle(KeyEvent event) {
+                readLike(searchField.getText());
+
+            }
         });
 
     }

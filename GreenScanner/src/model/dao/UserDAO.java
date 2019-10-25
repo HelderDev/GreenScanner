@@ -12,8 +12,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.bean.User;
 
@@ -44,19 +42,13 @@ public class UserDAO {
 
             if (rs.next()) {
                 check = true;
-
-//                u.setId(rs.getInt("id"));
-//                u.setName(rs.getString("name"));
-//                u.setTitle(rs.getString("title"));
-//                u.setPermission(rs.getInt("permission"));
-//                u.setCreation(rs.getString("creation"));;
-                //   User u = new User(rs.getInt("id"));
+ 
                 idValue = rs.getInt("id");
                 userName = rs.getString("name");
                 titleName = rs.getString("title");
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao acessar o banco" + ex);
+            JOptionPane.showMessageDialog(null, "Erro ao acessar o banco: " + ex);
 
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
@@ -82,7 +74,7 @@ public class UserDAO {
                 permission = rs.getInt("permission");
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao acessar o banco" + ex);
+            JOptionPane.showMessageDialog(null, "Erro ao acessar o banco: " + ex);
 
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
@@ -105,7 +97,7 @@ public class UserDAO {
 
             JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao salvar:" + ex);
+            JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex);
         } finally {
             ConnectionFactory.closeConnection(con, stmt);
         }
@@ -133,7 +125,7 @@ public class UserDAO {
                 users.add(user);
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao acessar o banco" + ex);
+            JOptionPane.showMessageDialog(null, "Erro ao acessar o banco: " + ex);
 
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
@@ -167,7 +159,7 @@ public class UserDAO {
                 users.add(user);
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao acessar o banco" + ex);
+            JOptionPane.showMessageDialog(null, "Erro ao acessar o banco: " + ex);
 
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
@@ -200,7 +192,7 @@ public class UserDAO {
                 users.add(user);
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao acessar o banco" + ex);
+            JOptionPane.showMessageDialog(null, "Erro ao acessar o banco: " + ex);
 
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
@@ -226,7 +218,7 @@ public class UserDAO {
 
             JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao atualizar:" + ex);
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar: " + ex);
         } finally {
             ConnectionFactory.closeConnection(con, stmt);
         }

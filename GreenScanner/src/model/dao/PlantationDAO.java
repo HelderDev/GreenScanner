@@ -54,7 +54,7 @@ public class PlantationDAO {
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao acessar o banco" + ex);
+            JOptionPane.showMessageDialog(null, "Erro ao acessar o banco: " + ex);
 
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
@@ -95,7 +95,7 @@ public class PlantationDAO {
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao acessar o banco" + ex);
+            JOptionPane.showMessageDialog(null, "Erro ao acessar o banco: " + ex);
 
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
