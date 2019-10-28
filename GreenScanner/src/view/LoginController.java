@@ -5,9 +5,14 @@
  */
 package view;
 
+import com.machinezoo.sourceafis.FingerprintTemplate;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -53,7 +58,7 @@ public class LoginController implements Initializable {
                         stage.setScene(scene);
                         stage.show();
 
-                         ((Node) (event.getSource())).getScene().getWindow().hide();
+                        ((Node) (event.getSource())).getScene().getWindow().hide();
                     } catch (IOException e) {
                         JOptionPane.showMessageDialog(null, e);
                     }
@@ -66,7 +71,7 @@ public class LoginController implements Initializable {
                         stage.setScene(scene);
                         stage.show();
 
-                         ((Node) (event.getSource())).getScene().getWindow().hide();
+                        ((Node) (event.getSource())).getScene().getWindow().hide();
                     } catch (IOException e) {
                         JOptionPane.showMessageDialog(null, "deu erro bixao");
                     }
@@ -79,7 +84,7 @@ public class LoginController implements Initializable {
                         stage.setScene(scene);
                         stage.show();
 
-                         ((Node) (event.getSource())).getScene().getWindow().hide();
+                        ((Node) (event.getSource())).getScene().getWindow().hide();
                     } catch (IOException e) {
                         JOptionPane.showMessageDialog(null, e);
                     }
@@ -91,6 +96,26 @@ public class LoginController implements Initializable {
         } else {
             JOptionPane.showMessageDialog(null, "Usuário inválido!");
         }
+    }
+
+    @FXML
+    private void fingerPrint() {
+        byte[] probeImage;
+        try {
+            probeImage = Files.readAllBytes(Paths.get("C:\\Users\\amorimhe\\Documents\\NetBeansProjects\\Versioned GreenScanner\\GreenScanner\\src\\view\\probe.png"));
+            byte[] candidateImage = Files.readAllBytes(Paths.get("C:\\Users\\amorimhe\\Documents\\NetBeansProjects\\Versioned GreenScanner\\GreenScanner\\src\\view\\probe.png"));
+
+            FingerprintTemplate probe = new FingerprintTemplate()
+                    .dpi(500)
+                    .create(probeImage);
+
+//            FingerprintTemplate candidate = new FingerprintTemplate()
+//                    .dpi(500)
+//                    .create(candidateImage);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+        
     }
 
     @Override

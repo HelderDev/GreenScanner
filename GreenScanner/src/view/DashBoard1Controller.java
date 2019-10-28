@@ -5,8 +5,7 @@
  */
 package view;
 
-import com.machinezoo.sourceafis.FingerprintTemplate;
-import java.io.IOException;
+ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
