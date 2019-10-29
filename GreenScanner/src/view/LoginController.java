@@ -5,8 +5,8 @@
  */
 package view;
 
-import com.machinezoo.sourceafis.FingerprintImage;
-import com.machinezoo.sourceafis.FingerprintTemplate;
+import com.machinezoo.sourceafis.*;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -101,8 +101,10 @@ public class LoginController implements Initializable {
     private void fingerPrint() {
         byte[] probeImage;
         try {
-            probeImage = Files.readAllBytes(Paths.get("C:\\Users\\amorimhe\\Documents\\NetBeansProjects\\Versioned GreenScanner\\GreenScanner\\src\\view\\probe.png"));
-            byte[] candidateImage = Files.readAllBytes(Paths.get("C:\\Users\\amorimhe\\Documents\\NetBeansProjects\\Versioned GreenScanner\\GreenScanner\\src\\view\\probe.png"));
+            String path = new File("src/view/images/fingerprints").getAbsolutePath();
+
+            probeImage = Files.readAllBytes(Paths.get(path + "/101_1.tif"));
+            byte[] candidateImage = Files.readAllBytes(Paths.get(path + "/teste.tif"));
 
             FingerprintTemplate probe = new FingerprintTemplate(
                     new FingerprintImage()
@@ -116,6 +118,15 @@ public class LoginController implements Initializable {
 
             System.out.println("Probe: " + probe);
             System.out.println("Candidate: " + candidate);
+
+            double score = new FingerprintMatcher()
+                    .index(probe)
+                    .match(candidate);
+
+            double threshold = 340;
+            boolean matches = score >= threshold;
+            System.out.println("Matches: " + matches);
+            System.out.println("Score:" + score);
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
