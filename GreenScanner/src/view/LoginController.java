@@ -5,14 +5,13 @@
  */
 package view;
 
+import com.machinezoo.sourceafis.FingerprintImage;
 import com.machinezoo.sourceafis.FingerprintTemplate;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -105,17 +104,22 @@ public class LoginController implements Initializable {
             probeImage = Files.readAllBytes(Paths.get("C:\\Users\\amorimhe\\Documents\\NetBeansProjects\\Versioned GreenScanner\\GreenScanner\\src\\view\\probe.png"));
             byte[] candidateImage = Files.readAllBytes(Paths.get("C:\\Users\\amorimhe\\Documents\\NetBeansProjects\\Versioned GreenScanner\\GreenScanner\\src\\view\\probe.png"));
 
-            FingerprintTemplate probe = new FingerprintTemplate()
-                    .dpi(500)
-                    .create(probeImage);
+            FingerprintTemplate probe = new FingerprintTemplate(
+                    new FingerprintImage()
+                            .dpi(500)
+                            .decode(probeImage));
 
-//            FingerprintTemplate candidate = new FingerprintTemplate()
-//                    .dpi(500)
-//                    .create(candidateImage);
+            FingerprintTemplate candidate = new FingerprintTemplate(
+                    new FingerprintImage()
+                            .dpi(500)
+                            .decode(candidateImage));
+
+            System.out.println("Probe: " + probe);
+            System.out.println("Candidate: " + candidate);
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
-        
+
     }
 
     @Override
