@@ -6,10 +6,8 @@
 package view;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
 import com.machinezoo.sourceafis.*;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -30,7 +28,9 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
+import model.bean.FingerPrint;
 import model.bean.FingerReader;
+import model.dao.FingerPrintDAO;
 import model.dao.UserDAO;
 
 /**
@@ -47,16 +47,38 @@ public class LoginController implements Initializable {
     @FXML
     private void login(ActionEvent event) {
 
-        Stage stage = new Stage();
-        stage.getIcons().add(new Image(getClass().getResourceAsStream("images/sprout.png")));
-        stage.titleProperty().setValue("DashBoard");
-        // stage.setResizable(false);
+       
+    }
 
-        UserDAO dao = new UserDAO();
+    @FXML
+    private void fingerPrint(ActionEvent event) {
+        int cfp = 0;
+        JFileChooser jfc;
+        jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+        jfc.setAcceptAllFileFilterUsed(false);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(".tif", "tif");
+        jfc.addChoosableFileFilter(filter);
 
-        if (dao.checkLogin(nameField.getText(), idField.getText())) {
+        jfc.setDialogTitle("Selecione o arquivo para entrar no GreenScanner");
+        int returnValue = jfc.showOpenDialog(null);
 
-            switch (dao.checkPermission(nameField.getText(), idField.getText())) {
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            try {
+                checkFingerprint(Files.readAllBytes(Paths.get(jfc.getSelectedFile().getAbsolutePath())));
+                cfp = checkFingerprint(Files.readAllBytes(Paths.get(jfc.getSelectedFile().getAbsolutePath())));
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao buscar arquivo, tente novamente mais tarde");
+            }
+        }
+
+        if (cfp != 0) {
+            Stage stage = new Stage();
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("images/sprout.png")));
+            stage.titleProperty().setValue("DashBoard");
+            // stage.setResizable(false);
+
+            UserDAO dao = new UserDAO();
+            switch (dao.checkPermission(cfp)) {
                 case 1:
                     try {
                         Parent root = FXMLLoader.load(getClass().getResource("DashBoard1.fxml"));
@@ -103,79 +125,6 @@ public class LoginController implements Initializable {
         } else {
             JOptionPane.showMessageDialog(null, "Usuário inválido!");
         }
-    }
-
-    @FXML
-    private void fingerPrint() {
-        
-         JFileChooser jfc;
-        jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-        jfc.setAcceptAllFileFilterUsed(false);
-        FileNameExtensionFilter filter = new FileNameExtensionFilter(".tif", "tif");
-        jfc.addChoosableFileFilter(filter);
-        
-        jfc.setDialogTitle("Selecione o arquivo para entrar no GreenScanner");
-        int returnValue = jfc.showOpenDialog(null);
-        
-        if (returnValue == JFileChooser.APPROVE_OPTION) {
-            try {
-                checkFingerprint(Files.readAllBytes(Paths.get(jfc.getSelectedFile().getAbsolutePath())));
-            } catch (IOException ex) {
-                JOptionPane.showMessageDialog(null, "Erro ao buscar arquivo, tente novamente mais tarde");
-            }
-        }
-        
-        
-        
-//        byte[] probeImage;
-//        try {
-//            String path = new File("src/view/images/fingerprints").getAbsolutePath();
-//
-//            probeImage = Files.readAllBytes(Paths.get(path + "/101_1.tif"));
-//            byte[] candidateImage = Files.readAllBytes(Paths.get(path + "/teste.tif"));
-//
-//            FingerprintTemplate probe = new FingerprintTemplate(
-//                    new FingerprintImage()
-//                            .dpi(500)
-//                            .decode(probeImage));
-//
-//            FingerprintTemplate candidate = new FingerprintTemplate(
-//                    new FingerprintImage()
-//                            .dpi(500)
-//                            .decode(candidateImage));
-//
-//            System.out.println("Probe: " + probe);
-//            System.out.println("Candidate: " + candidate);
-//            System.out.println("Serialize: " + candidate.serialize());
-//            double score = new FingerprintMatcher()
-//                    .index(probe)
-//                    .match(candidate);
-//
-//            double threshold = 340;
-//            boolean matches = score >= threshold;
-//            System.out.println("Matches: " + matches);
-//            System.out.println("Score:" + score);
-//
-//            Gson gson = new Gson();
-//            // 1. JSON file to Java object
-//
-//            // 2. JSON string to Java object
-//           // String json = "{'name' : 'mkyong'}";
-//
-//            // 3. JSON file to JsonElement, later String
-//            //String result = gson.toJson(json);
-//
-//            System.out.println("Altura: " + loadUserFromJSONGson(candidate.serialize()).getHeight());
-//            System.out.println("Largura: " + loadUserFromJSONGson(candidate.serialize()).getWidth());
-//            System.out.println("Version: " + loadUserFromJSONGson(candidate.serialize()).getVersion());
-//            System.out.println("minutiae 1: " + loadUserFromJSONGson(candidate.serialize()).getMinutiae().get(0));
-//            System.out.println("minutiae 2: " + loadUserFromJSONGson(candidate.serialize()).getMinutiae().get(1));
-//            System.out.println("minutiae 3: " + loadUserFromJSONGson(candidate.serialize()).getMinutiae().get(2));
-//            System.out.println("minutiae 4: " + loadUserFromJSONGson(candidate.serialize()).getMinutiae().get(3));
-//
-//        } catch (IOException ex) {
-//            JOptionPane.showMessageDialog(null, ex);
-//        }
 
     }
 
@@ -192,7 +141,7 @@ public class LoginController implements Initializable {
         return user;
     }
 
-    private void checkFingerprint(byte[] candidateByte) {
+    private int checkFingerprint(byte[] candidateByte) {
 
         FingerprintTemplate candidate = new FingerprintTemplate(
                 new FingerprintImage()
@@ -200,41 +149,47 @@ public class LoginController implements Initializable {
                         .decode(candidateByte));
 
         ArrayList<String> allFingers = getAllFingers();
-        
-        for (String finger : allFingers) {
-            FingerprintTemplate probe = new FingerprintTemplate();
-            probe.deserialize(finger);
-            
-            double score = new FingerprintMatcher()
-                .index(probe)
-                .match(candidate);
+        FingerPrintDAO fpDAO = new FingerPrintDAO();
 
-            double threshold = 340;
+        for (FingerPrint finger : fpDAO.readAllFingers()) {
+            FingerprintTemplate probe = new FingerprintTemplate();
+            probe.deserialize(finger.getFinger_detail());
+
+            double score = new FingerprintMatcher()
+                    .index(probe)
+                    .match(candidate);
+
+            double threshold = 280;
             boolean matches = score >= threshold;
+            if (matches) {
+                return finger.getId_user();
+            }
             System.out.println("Matches: " + matches);
-            System.out.println("Score:" + score);
+            System.out.println("Score: " + score);
         }
-        
+        return 0;
     }
+
     private ArrayList<String> getAllFingers() {
         String path = new File("src/view/images/fingerprints").getAbsolutePath();
         byte[] probeImage = null;
         try {
+            FingerPrintDAO fpDAO = new FingerPrintDAO();
             probeImage = Files.readAllBytes(Paths.get(path + "/101_1.tif"));
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao buscar arquivo, tente novamente mais tarde");
         }
-        
+
         FingerprintTemplate probe = new FingerprintTemplate(
                 new FingerprintImage()
                         .dpi(500)
                         .decode(probeImage));
-        
+
         String fingerJSON = probe.serialize();
-        
+
         ArrayList<String> fingers = new ArrayList<String>();
         fingers.add(fingerJSON);
-        
+
         return fingers;
     }
 }

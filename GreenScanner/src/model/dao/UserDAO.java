@@ -57,7 +57,7 @@ public class UserDAO {
         return check;
     }
 
-    public int checkPermission(String name, String id) {
+    public int checkPermission(int id) {
         int permission = 0;
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
@@ -65,13 +65,15 @@ public class UserDAO {
         ResultSet rs = null;
 
         try {
-            stmt = con.prepareStatement("SELECT PERMISSION FROM user  WHERE name = ? and id = ?");
-            stmt.setString(1, name);
-            stmt.setString(2, id);
-
+            stmt = con.prepareStatement("SELECT * FROM user WHERE id = ?");
+            stmt.setInt(1, id);
+ 
             rs = stmt.executeQuery();
             if (rs.next()) {
                 permission = rs.getInt("permission");
+                idValue = rs.getInt("id");
+                userName = rs.getString("name");
+                titleName = rs.getString("title");
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao acessar o banco: " + ex);
