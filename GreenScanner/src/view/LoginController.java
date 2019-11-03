@@ -5,8 +5,11 @@
  */
 package view;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.machinezoo.sourceafis.*;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -23,6 +26,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
+import model.bean.FingerReader;
 import model.dao.UserDAO;
 
 /**
@@ -118,7 +122,7 @@ public class LoginController implements Initializable {
 
             System.out.println("Probe: " + probe);
             System.out.println("Candidate: " + candidate);
-
+            System.out.println("Serialize: " + candidate.serialize());
             double score = new FingerprintMatcher()
                     .index(probe)
                     .match(candidate);
@@ -127,6 +131,24 @@ public class LoginController implements Initializable {
             boolean matches = score >= threshold;
             System.out.println("Matches: " + matches);
             System.out.println("Score:" + score);
+
+            Gson gson = new Gson();
+            // 1. JSON file to Java object
+
+            // 2. JSON string to Java object
+            String json = "{'name' : 'mkyong'}";
+
+            // 3. JSON file to JsonElement, later String
+            String result = gson.toJson(json);
+
+            System.out.println("Altura: " + loadUserFromJSONGson(candidate.serialize()).getHeight());
+            System.out.println("Largura: " + loadUserFromJSONGson(candidate.serialize()).getWidth());
+            System.out.println("Version: " + loadUserFromJSONGson(candidate.serialize()).getVersion());
+            System.out.println("minutiae 1: " + loadUserFromJSONGson(candidate.serialize()).getMinutiae().get(0));
+            System.out.println("minutiae 2: " + loadUserFromJSONGson(candidate.serialize()).getMinutiae().get(1));
+            System.out.println("minutiae 3: " + loadUserFromJSONGson(candidate.serialize()).getMinutiae().get(2));
+            System.out.println("minutiae 4: " + loadUserFromJSONGson(candidate.serialize()).getMinutiae().get(3));
+
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
@@ -137,6 +159,13 @@ public class LoginController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
 
+    }
+
+    public FingerReader loadUserFromJSONGson(String jsonString) {
+        Gson gson = new Gson();
+        FingerReader user = gson.fromJson(jsonString, FingerReader.class);
+
+        return user;
     }
 
 }
