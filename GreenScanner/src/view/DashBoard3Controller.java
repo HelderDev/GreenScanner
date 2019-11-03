@@ -77,8 +77,7 @@ public class DashBoard3Controller implements Initializable {
     private TableColumn<User, String> uCreation;
     @FXML
     private TextField searchField;
-    ObservableList<User> oblist = FXCollections.observableArrayList();
-
+ 
     @FXML
     private void logout(ActionEvent event) {
         Stage stage = new Stage();

@@ -58,8 +58,7 @@ public class DashBoard1Controller implements Initializable {
     @FXML
     private TableColumn<Plantation, String> state;
 
-    ObservableList<User> oblist = FXCollections.observableArrayList();
-
+ 
     public void readTable(int u) {
         plantsTable.getItems().clear();
         PlantationDAO pdao = new PlantationDAO();

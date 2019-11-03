@@ -32,8 +32,6 @@ public class PesticidesController implements Initializable {
     @FXML
     private TableColumn<PlantationPesticide, String> permissao;
 
-    ObservableList<PlantationPesticide> oblist = FXCollections.observableArrayList();
-
  
     public void readTable(int pest) {
         pestTable.getItems().clear();

@@ -74,8 +74,7 @@ public class DashBoard2Controller implements Initializable {
     @FXML
     private TableColumn<User, String> uCreation;
 
-    ObservableList<User> oblist = FXCollections.observableArrayList();
-
+ 
     @FXML
     private void logout(ActionEvent event) {
         Stage stage = new Stage();
@@ -121,9 +120,9 @@ public class DashBoard2Controller implements Initializable {
 
     private void printRow(Plantation item) {
         usersTable.getItems().clear();
-        System.out.println(item.getId());
+        
         UserDAO udao = new UserDAO();
-        System.out.println(item.getId());
+        
         for (User u : udao.readRow(item.getId())) {
 
             uID.setCellValueFactory(new PropertyValueFactory<>("id"));

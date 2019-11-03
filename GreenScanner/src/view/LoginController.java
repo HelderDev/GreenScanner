@@ -140,8 +140,7 @@ public class LoginController implements Initializable {
             if (matches) {
                 return finger.getId_user();
             }
-            System.out.println("Matches: " + matches);
-            System.out.println("Score: " + score);
+  
         }
         return 0;
     }
