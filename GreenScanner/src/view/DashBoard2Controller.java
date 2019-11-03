@@ -191,7 +191,6 @@ public class DashBoard2Controller implements Initializable {
 
         usersTable.setPlaceholder(new Label("Selecione uma plantação."));
         plantsTable.setRowFactory(tv -> {
-            System.out.println("teste");
             TableRow<Plantation> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (!row.isEmpty() && event.getButton() == MouseButton.PRIMARY

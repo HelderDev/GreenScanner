@@ -14,9 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import model.bean.FingerPrint;
-import model.bean.Plantation;
-import static model.dao.PlantationDAO.owner;
-import static model.dao.PlantationDAO.title;
 
 /**
  *

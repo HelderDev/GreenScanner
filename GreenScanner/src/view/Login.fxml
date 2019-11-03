@@ -5,10 +5,10 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="338.0" prefWidth="341.0" style="-fx-background-color: #e7ffe0;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.LoginController">
+<AnchorPane id="AnchorPane" prefHeight="214.0" prefWidth="257.0" style="-fx-background-color: #e7ffe0;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.LoginController">
     <children>
-        <Button fx:id="buttonLoggin" layoutX="102.0" layoutY="227.0" onAction="#fingerPrint" prefHeight="25.0" prefWidth="148.0" style="-fx-background-color: #5D995D; -fx-text-fill: #fff;" text="Entrar com digital ➜" AnchorPane.rightAnchor="91.0" />
-      <ImageView fitHeight="99.0" fitWidth="118.0" layoutX="126.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+        <Button fx:id="buttonLoggin" layoutX="54.0" layoutY="164.0" onAction="#fingerPrint" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: #5D995D; -fx-text-fill: #fff;" text="Entrar com digital ➜" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="54.0" AnchorPane.rightAnchor="54.0" AnchorPane.topAnchor="164.0" />
+      <ImageView fitHeight="99.0" fitWidth="118.0" layoutX="79.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="79.0" AnchorPane.rightAnchor="79.0" AnchorPane.topAnchor="38.0">
          <image>
             <Image url="@images/farmer.png" />
          </image>
