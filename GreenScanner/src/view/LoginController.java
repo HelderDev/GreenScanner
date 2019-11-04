@@ -36,80 +36,84 @@ public class LoginController implements Initializable {
 
     @FXML
     private void fingerPrint(ActionEvent event) {
-        int cfp = 0;
-        JFileChooser jfc;
-        jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-        jfc.setAcceptAllFileFilterUsed(false);
-        FileNameExtensionFilter filter = new FileNameExtensionFilter(".tif", "tif");
-        jfc.addChoosableFileFilter(filter);
+        try {
+            int cfp = 0;
+            JFileChooser jfc;
+            jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+            jfc.setAcceptAllFileFilterUsed(false);
+            FileNameExtensionFilter filter = new FileNameExtensionFilter(".tif", "tif");
+            jfc.addChoosableFileFilter(filter);
 
-        jfc.setDialogTitle("Selecione o arquivo para entrar no GreenScanner");
-        int returnValue = jfc.showOpenDialog(null);
+            jfc.setDialogTitle("Selecione o arquivo para entrar no GreenScanner");
+            int returnValue = jfc.showOpenDialog(null);
 
-        if (returnValue == JFileChooser.APPROVE_OPTION) {
-            try {
-                checkFingerprint(Files.readAllBytes(Paths.get(jfc.getSelectedFile().getAbsolutePath())));
-                cfp = checkFingerprint(Files.readAllBytes(Paths.get(jfc.getSelectedFile().getAbsolutePath())));
-            } catch (IOException ex) {
-                JOptionPane.showMessageDialog(null, "Erro ao buscar arquivo, tente novamente mais tarde");
+            if (returnValue == JFileChooser.APPROVE_OPTION) {
+                try {
+                    checkFingerprint(Files.readAllBytes(Paths.get(jfc.getSelectedFile().getAbsolutePath())));
+                    cfp = checkFingerprint(Files.readAllBytes(Paths.get(jfc.getSelectedFile().getAbsolutePath())));
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(null, "Erro ao buscar arquivo, tente novamente mais tarde");
+                }
             }
-        }
 
-        if (cfp != 0) {
-            Stage stage = new Stage();
-            stage.getIcons().add(new Image(getClass().getResourceAsStream("images/sprout.png")));
-            stage.titleProperty().setValue("DashBoard");
-            // stage.setResizable(false);
+            if (cfp != 0) {
+                Stage stage = new Stage();
+                stage.getIcons().add(new Image(getClass().getResourceAsStream("images/sprout.png")));
+                stage.titleProperty().setValue("DashBoard");
+                // stage.setResizable(false);
 
-            UserDAO dao = new UserDAO();
-            switch (dao.checkPermission(cfp)) {
-                case 1:
-                    try {
-                        Parent root = FXMLLoader.load(getClass().getResource("DashBoard1.fxml"));
+                UserDAO dao = new UserDAO();
+                switch (dao.checkPermission(cfp)) {
+                    case 1:
+                        try {
+                            Parent root = FXMLLoader.load(getClass().getResource("DashBoard1.fxml"));
 
-                        Scene scene = new Scene(root);
-                        stage.setScene(scene);
-                        stage.show();
+                            Scene scene = new Scene(root);
+                            stage.setScene(scene);
+                            stage.show();
 
-                        ((Node) (event.getSource())).getScene().getWindow().hide();
-                    } catch (IOException e) {
-                        JOptionPane.showMessageDialog(null, e);
-                    }
-                    break;
-                case 2:
-                    try {
-                        Parent root = FXMLLoader.load(getClass().getResource("DashBoard2.fxml"));
+                            ((Node) (event.getSource())).getScene().getWindow().hide();
+                        } catch (IOException e) {
+                            JOptionPane.showMessageDialog(null, e);
+                        }
+                        break;
+                    case 2:
+                        try {
+                            Parent root = FXMLLoader.load(getClass().getResource("DashBoard2.fxml"));
 
-                        Scene scene = new Scene(root);
-                        stage.setScene(scene);
-                        stage.show();
+                            Scene scene = new Scene(root);
+                            stage.setScene(scene);
+                            stage.show();
 
-                        ((Node) (event.getSource())).getScene().getWindow().hide();
-                    } catch (IOException e) {
-                        JOptionPane.showMessageDialog(null, "deu erro bixao");
-                    }
-                    break;
-                case 3:
-                    try {
-                        Parent root = FXMLLoader.load(getClass().getResource("DashBoard3.fxml"));
+                            ((Node) (event.getSource())).getScene().getWindow().hide();
+                        } catch (IOException e) {
+                            JOptionPane.showMessageDialog(null, "deu erro bixao");
+                        }
+                        break;
+                    case 3:
+                        try {
+                            Parent root = FXMLLoader.load(getClass().getResource("DashBoard3.fxml"));
 
-                        Scene scene = new Scene(root);
-                        stage.setScene(scene);
-                        stage.show();
+                            Scene scene = new Scene(root);
+                            stage.setScene(scene);
+                            stage.show();
 
-                        ((Node) (event.getSource())).getScene().getWindow().hide();
-                    } catch (IOException e) {
-                        JOptionPane.showMessageDialog(null, e);
-                    }
-                    break;
-                default:
-                    JOptionPane.showMessageDialog(null, "Usuário inválido!");
-                    ;
+                            ((Node) (event.getSource())).getScene().getWindow().hide();
+                        } catch (IOException e) {
+                            JOptionPane.showMessageDialog(null, e);
+                        }
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(null, "Usuário inválido!");
+                        ;
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Usuário inválido!");
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Usuário inválido!");
-        }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro, tente novamente: " + e);
 
+        }
     }
 
     @Override
@@ -140,7 +144,7 @@ public class LoginController implements Initializable {
             if (matches) {
                 return finger.getId_user();
             }
-  
+
         }
         return 0;
     }

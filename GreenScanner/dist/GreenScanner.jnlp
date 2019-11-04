@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="GreenScanner.jar" size="10623769" download="eager" />
+    <jar href="GreenScanner.jar" size="10504275" download="eager" />
     <jar href="lib\commons-io-2.6.jar" size="214788" download="eager" />
     <jar href="lib\gson-2.8.5.jar" size="241622" download="eager" />
     <jar href="lib\jackson-annotations-2.5.0.jar" size="39815" download="eager" />
