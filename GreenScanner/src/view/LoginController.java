@@ -134,12 +134,12 @@ public class LoginController implements Initializable {
         for (FingerPrint finger : fpDAO.readAllFingers()) {
             FingerprintTemplate probe = new FingerprintTemplate();
             probe.deserialize(finger.getFinger_detail());
+            
 
             double score = new FingerprintMatcher()
                     .index(probe)
                     .match(candidate);
-
-            double threshold = 280;
+                double threshold = 280;
             boolean matches = score >= threshold;
             if (matches) {
                 return finger.getId_user();

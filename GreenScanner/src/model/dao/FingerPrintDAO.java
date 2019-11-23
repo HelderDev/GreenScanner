@@ -31,7 +31,7 @@ public class FingerPrintDAO {
 
         try {
 
-            stmt = con.prepareStatement("select * from fingerprint");
+            stmt = con.prepareStatement("select * from fingerprint order by finger_detail desc");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -42,7 +42,7 @@ public class FingerPrintDAO {
  
                 fPrints.add(fp);
             }
-
+            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao acessar o banco: " + ex);
 

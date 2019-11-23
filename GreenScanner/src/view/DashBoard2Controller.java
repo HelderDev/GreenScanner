@@ -196,8 +196,8 @@ public class DashBoard2Controller implements Initializable {
                         && event.getClickCount() == 1) {
                     Plantation clickedRow = row.getItem();
                     printRow(clickedRow);
-                } else if (!row.isEmpty() && event.getButton() == MouseButton.PRIMARY
-                        && event.getClickCount() == 2) {
+                } else if ((!row.isEmpty() && event.getButton() == MouseButton.PRIMARY
+                        && event.getClickCount() == 2) || (!row.isEmpty() && event.getButton() == MouseButton.SECONDARY)) {
 
                     Plantation clickedRow = row.getItem();
                     showPesticides(clickedRow);
