@@ -21,6 +21,8 @@ import model.bean.PlantationPesticide;
  */
 public class PlantationPesticideDAO {
 
+    public static boolean warning = false;
+
     public List<PlantationPesticide> pesticides(int id) {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
@@ -41,7 +43,6 @@ public class PlantationPesticideDAO {
 
                 plant.setId(rs.getInt("plantPestID"));
                 plant.setId_plantation(rs.getInt("plantID"));
-                //   id_plantation = rs.getInt("plantPest.id_plantation");
                 plant.setId_pesticide(rs.getInt("pestID"));
                 plant.setPlantName(rs.getString("plantName"));
                 plant.setPestName(rs.getString("pestName"));
@@ -49,7 +50,7 @@ public class PlantationPesticideDAO {
                     plant.setAllowed("✔");
                 } else {
                     plant.setAllowed("✖");
-
+                    warning = true;
                 }
                 plants.add(plant);
 
@@ -63,5 +64,46 @@ public class PlantationPesticideDAO {
         }
 
         return plants;
+    }
+
+    public void notifyUser(int id) {
+
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+
+        ResultSet rs = null;
+
+        try {
+            String sql = "update user set blocked = true where id = ?";
+
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, id);
+            stmt.execute();
+
+//            while (rs.next()) {
+//                PlantationPesticide plant = new PlantationPesticide();
+//
+//                plant.setId(rs.getInt("plantPestID"));
+//                plant.setId_plantation(rs.getInt("plantID"));
+//                //   id_plantation = rs.getInt("plantPest.id_plantation");
+//                plant.setId_pesticide(rs.getInt("pestID"));
+//                plant.setPlantName(rs.getString("plantName"));
+//                plant.setPestName(rs.getString("pestName"));
+//                if (rs.getBoolean("allowed")) {
+//                    plant.setAllowed("✔");
+//                } else {
+//                    plant.setAllowed("✖");
+//
+//                }
+//                plants.add(plant);
+//
+//            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao acessar o banco: " + ex);
+
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+
     }
 }

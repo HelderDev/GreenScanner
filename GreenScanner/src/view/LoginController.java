@@ -74,7 +74,7 @@ public class LoginController implements Initializable {
 
                             ((Node) (event.getSource())).getScene().getWindow().hide();
                         } catch (IOException e) {
-                            JOptionPane.showMessageDialog(null, e);
+                            JOptionPane.showMessageDialog(null, "Não foi possivel conectar");
                         }
                         break;
                     case 2:
@@ -87,7 +87,7 @@ public class LoginController implements Initializable {
 
                             ((Node) (event.getSource())).getScene().getWindow().hide();
                         } catch (IOException e) {
-                            JOptionPane.showMessageDialog(null, "deu erro bixao");
+                            JOptionPane.showMessageDialog(null, "Não foi possivel conectar");
                         }
                         break;
                     case 3:
@@ -100,7 +100,7 @@ public class LoginController implements Initializable {
 
                             ((Node) (event.getSource())).getScene().getWindow().hide();
                         } catch (IOException e) {
-                            JOptionPane.showMessageDialog(null, e);
+                            JOptionPane.showMessageDialog(null, "Não foi possivel conectar");
                         }
                         break;
                     default:

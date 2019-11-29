@@ -5,23 +5,23 @@
  */
 package model.bean;
 
- 
 /**
  *
  * @author AmorimHe
  */
 public class User {
+
     private int id;
     private String name;
     private String title;
     private int permission;
+    private String creation;
+    private boolean blocked;
 
-   private String creation;
+    public User(int id) {
+        this.id = id;
+    }
 
-   public User(int id){
-       this.id = id;
-   }
-   
     public int getId() {
         return id;
     }
@@ -29,7 +29,13 @@ public class User {
     public void setId(int id) {
         this.id = id;
     }
+   public boolean getBlocked() {
+        return blocked;
+    }
 
+    public void setBlocked(boolean blocked) {
+        this.blocked = blocked;
+    }
     public String getName() {
         return name;
     }
@@ -62,8 +68,4 @@ public class User {
         this.creation = creation;
     }
 
-
-  }
- 
-    
- 
+}

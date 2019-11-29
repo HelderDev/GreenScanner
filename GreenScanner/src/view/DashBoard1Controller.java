@@ -8,8 +8,7 @@ package view;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,9 +28,9 @@ import javax.swing.JOptionPane;
 import model.bean.Plantation;
 import model.bean.PlantationPesticide;
 import static model.bean.PlantationPesticide.id_plantation;
-import model.bean.User;
 import model.dao.PlantationDAO;
 import model.dao.PlantationPesticideDAO;
+import static model.dao.UserDAO.blocked;
 import static model.dao.UserDAO.idValue;
 import static model.dao.UserDAO.titleName;
 import static model.dao.UserDAO.userName;
@@ -58,7 +57,6 @@ public class DashBoard1Controller implements Initializable {
     @FXML
     private TableColumn<Plantation, String> state;
 
- 
     public void readTable(int u) {
         plantsTable.getItems().clear();
         PlantationDAO pdao = new PlantationDAO();
@@ -129,23 +127,29 @@ public class DashBoard1Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        if (blocked) {
+            JOptionPane.showMessageDialog(null, "Você está sendo multado devido ao uso de pesticidas proibidos, "
+                    + "se a multa não for paga e os pesticidas removidos em 15 dias, "
+                    + "um representante legal irá até sua residência!");
+            Stage stage = (Stage) welcomeLabel.getScene().getWindow();
+            stage.close();
+        } else {
+            welcomeLabel.setText("Bem vindo " + titleName + " " + userName);
+            readTable(idValue);
 
-        welcomeLabel.setText("Bem vindo " + titleName + " " + userName);
-        readTable(idValue);
+            plantsTable.setRowFactory(tv -> {
+                TableRow<Plantation> row = new TableRow<>();
+                row.setOnMouseClicked(event -> {
+                    if (!row.isEmpty() && event.getButton() == MouseButton.PRIMARY
+                            && event.getClickCount() == 2) {
 
-        plantsTable.setRowFactory(tv -> {
-            TableRow<Plantation> row = new TableRow<>();
-            row.setOnMouseClicked(event -> {
-                if (!row.isEmpty() && event.getButton() == MouseButton.PRIMARY
-                        && event.getClickCount() == 2) {
-
-                    Plantation clickedRow = row.getItem();
-                    showPesticides(clickedRow);
-                }
+                        Plantation clickedRow = row.getItem();
+                        showPesticides(clickedRow);
+                    }
+                });
+                return row;
             });
-            return row;
-        });
 
+        }
     }
-
 }

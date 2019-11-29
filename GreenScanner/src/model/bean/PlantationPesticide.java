@@ -13,6 +13,8 @@ public class PlantationPesticide {
 
     private int id;
     public static int id_plantation;
+    public static int idPestUser;
+    public static boolean blockedUser;
     private int id_pesticide;
     private String plantName;
     private String pestName;

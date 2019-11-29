@@ -8,8 +8,6 @@ package view;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -31,7 +29,7 @@ import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 import model.bean.Plantation;
 import model.bean.PlantationPesticide;
-import static model.bean.PlantationPesticide.id_plantation;
+import static model.bean.PlantationPesticide.*;
 import model.bean.User;
 import model.dao.PlantationDAO;
 import model.dao.PlantationPesticideDAO;
@@ -77,7 +75,7 @@ public class DashBoard3Controller implements Initializable {
     private TableColumn<User, String> uCreation;
     @FXML
     private TextField searchField;
- 
+
     @FXML
     private void logout(ActionEvent event) {
         Stage stage = new Stage();
@@ -139,7 +137,8 @@ public class DashBoard3Controller implements Initializable {
 
     private void printRow(User item) {
         plantsTable.getItems().clear();
-
+        idPestUser = item.getId();
+        blockedUser = item.getBlocked();
         PlantationDAO pdao = new PlantationDAO();
 
         for (Plantation p : pdao.readByUser(item.getId())) {
@@ -181,8 +180,6 @@ public class DashBoard3Controller implements Initializable {
         }
 
     }
-
-    
 
     @FXML
     @Override

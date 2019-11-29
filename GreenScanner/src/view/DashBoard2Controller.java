@@ -8,8 +8,6 @@ package view;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,6 +31,7 @@ import model.bean.User;
 import model.dao.PlantationDAO;
 import model.dao.PlantationPesticideDAO;
 import model.dao.UserDAO;
+import static model.dao.UserDAO.blocked;
 import static model.dao.UserDAO.idValue;
 import static model.dao.UserDAO.titleName;
 import static model.dao.UserDAO.userName;
@@ -74,7 +73,6 @@ public class DashBoard2Controller implements Initializable {
     @FXML
     private TableColumn<User, String> uCreation;
 
- 
     @FXML
     private void logout(ActionEvent event) {
         Stage stage = new Stage();
@@ -120,9 +118,9 @@ public class DashBoard2Controller implements Initializable {
 
     private void printRow(Plantation item) {
         usersTable.getItems().clear();
-        
+
         UserDAO udao = new UserDAO();
-        
+
         for (User u : udao.readRow(item.getId())) {
 
             uID.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -180,33 +178,39 @@ public class DashBoard2Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        if (blocked) {
+            JOptionPane.showMessageDialog(null, "Você está sendo multado devido ao uso de pesticidas proibidos, "
+                    + "se a multa não for paga e os pesticidas removidos em 15 dias, "
+                    + "um representante legal irá até sua residência!");
+            Stage stage = (Stage) welcomeLabel.getScene().getWindow();
+            stage.close();
+        } else {
+            welcomeLabel.setText("Bem-vindo " + titleName + " " + userName + "!");
+            readPlantations(idValue);
+            uID.setStyle("-fx-alignment: CENTER;");
+            uPermission.setStyle("-fx-alignment: CENTER;");
+            idField.setStyle("-fx-alignment: CENTER;");
+            plantsTable.setPlaceholder(new Label("Usuário é responsável por nenhuma plantação."));
 
-        welcomeLabel.setText("Bem-vindo " + titleName + " " + userName + "!");
-        readPlantations(idValue);
-        uID.setStyle("-fx-alignment: CENTER;");
-        uPermission.setStyle("-fx-alignment: CENTER;");
-        idField.setStyle("-fx-alignment: CENTER;");
-        plantsTable.setPlaceholder(new Label("Usuário é responsável por nenhuma plantação."));
+            usersTable.setPlaceholder(new Label("Selecione uma plantação."));
+            plantsTable.setRowFactory(tv -> {
+                TableRow<Plantation> row = new TableRow<>();
+                row.setOnMouseClicked(event -> {
+                    if (!row.isEmpty() && event.getButton() == MouseButton.PRIMARY
+                            && event.getClickCount() == 1) {
+                        Plantation clickedRow = row.getItem();
+                        printRow(clickedRow);
+                    } else if ((!row.isEmpty() && event.getButton() == MouseButton.PRIMARY
+                            && event.getClickCount() == 2) || (!row.isEmpty() && event.getButton() == MouseButton.SECONDARY)) {
 
-        usersTable.setPlaceholder(new Label("Selecione uma plantação."));
-        plantsTable.setRowFactory(tv -> {
-            TableRow<Plantation> row = new TableRow<>();
-            row.setOnMouseClicked(event -> {
-                if (!row.isEmpty() && event.getButton() == MouseButton.PRIMARY
-                        && event.getClickCount() == 1) {
-                    Plantation clickedRow = row.getItem();
-                    printRow(clickedRow);
-                } else if ((!row.isEmpty() && event.getButton() == MouseButton.PRIMARY
-                        && event.getClickCount() == 2) || (!row.isEmpty() && event.getButton() == MouseButton.SECONDARY)) {
+                        Plantation clickedRow = row.getItem();
+                        showPesticides(clickedRow);
+                    }
+                });
 
-                    Plantation clickedRow = row.getItem();
-                    showPesticides(clickedRow);
-                }
+                return row;
             });
-
-            return row;
-        });
-
+        }
     }
 
 }

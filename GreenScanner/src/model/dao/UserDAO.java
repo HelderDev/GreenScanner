@@ -24,10 +24,10 @@ public class UserDAO {
     public static int idValue;
     public static String userName;
     public static String titleName;
-
+    public static boolean blocked;
+    public static int permission;
 
     public int checkPermission(int id) {
-        int permission = 0;
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         //User u = new User();
@@ -36,13 +36,15 @@ public class UserDAO {
         try {
             stmt = con.prepareStatement("SELECT * FROM user WHERE id = ?");
             stmt.setInt(1, id);
- 
+
             rs = stmt.executeQuery();
             if (rs.next()) {
                 permission = rs.getInt("permission");
                 idValue = rs.getInt("id");
                 userName = rs.getString("name");
                 titleName = rs.getString("title");
+                blocked = rs.getBoolean("blocked");
+
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao acessar o banco: " + ex);
@@ -72,7 +74,9 @@ public class UserDAO {
                 user.setTitle(rs.getString("title"));
                 user.setPermission(rs.getInt("permission"));
                 user.setCreation(rs.getString("creation"));
+                user.setBlocked(rs.getBoolean("blocked"));
                 users.add(user);
+
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao acessar o banco: " + ex);
@@ -118,7 +122,7 @@ public class UserDAO {
         return users;
     }
 
-        public List<User> readLike(String u) {
+    public List<User> readLike(String u) {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
 
@@ -129,7 +133,7 @@ public class UserDAO {
         try {
             String sql = "select * from user where name like ?";
             stmt = con.prepareStatement(sql);
-            stmt.setString(1, u+"%");
+            stmt.setString(1, u + "%");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -150,5 +154,5 @@ public class UserDAO {
 
         return users;
     }
-    
+
 }
