@@ -80,24 +80,7 @@ public class PlantationPesticideDAO {
             stmt.setInt(1, id);
             stmt.execute();
 
-//            while (rs.next()) {
-//                PlantationPesticide plant = new PlantationPesticide();
-//
-//                plant.setId(rs.getInt("plantPestID"));
-//                plant.setId_plantation(rs.getInt("plantID"));
-//                //   id_plantation = rs.getInt("plantPest.id_plantation");
-//                plant.setId_pesticide(rs.getInt("pestID"));
-//                plant.setPlantName(rs.getString("plantName"));
-//                plant.setPestName(rs.getString("pestName"));
-//                if (rs.getBoolean("allowed")) {
-//                    plant.setAllowed("✔");
-//                } else {
-//                    plant.setAllowed("✖");
-//
-//                }
-//                plants.add(plant);
-//
-//            }
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao acessar o banco: " + ex);
 
